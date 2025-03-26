@@ -3,10 +3,6 @@ using UnityEngine.UI;
 
 public partial class Board
 {
-    private void SpawnCardOnTile(Vector2Int position)
-    {
-        
-    }
 
     private Vector3 CalCardPos(int index)
     {

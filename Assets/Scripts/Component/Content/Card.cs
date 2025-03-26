@@ -1,14 +1,20 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class Card : MonoBehaviour
 {
-    [SerializeField] private Image cardImage;
+    private Image _cardImage;
     private CardData _cardData;
+
+    private void Awake()
+    {
+        _cardImage = GetComponent<Image>();
+    }
 
     public void Initialize(CardData cardData)
     {
         _cardData = cardData;
-        cardImage.sprite = _cardData.sprite;
+        _cardImage.sprite = _cardData.sprite;
     }
 }
