@@ -6,330 +6,119 @@ using UnityEngine;
 public class CardDeck : ScriptableObject
 {
     public List<CardData> cards = new List<CardData>();
-
-    private void OnEnable()
-    {
-        if (cards == null || cards.Count == 0)
-        {
-            Init();
-        }
-    }
-
-    public void Init()
-    {
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Club,
-            rank = CardRank.Two,
-            sprite = Resources.Load<Sprite>("Sprites/2club")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Club,
-            rank = CardRank.Three,
-            sprite = Resources.Load<Sprite>("Sprites/3club")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Club,
-            rank = CardRank.Four,
-            sprite = Resources.Load<Sprite>("Sprites/4club")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Club,
-            rank = CardRank.Five,
-            sprite = Resources.Load<Sprite>("Sprites/5club")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Club,
-            rank = CardRank.Six,
-            sprite = Resources.Load<Sprite>("Sprites/6club")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Club,
-            rank = CardRank.Seven,
-            sprite = Resources.Load<Sprite>("Sprites/7club")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Club,
-            rank = CardRank.Eight,
-            sprite = Resources.Load<Sprite>("Sprites/8club")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Club,
-            rank = CardRank.Nine,
-            sprite = Resources.Load<Sprite>("Sprites/9club")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Club,
-            rank = CardRank.Ten,
-            sprite = Resources.Load<Sprite>("Sprites/10club")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Club,
-            rank = CardRank.Jack,
-            sprite = Resources.Load<Sprite>("Sprites/Jclub")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Club,
-            rank = CardRank.Queen,
-            sprite = Resources.Load<Sprite>("Sprites/Qclub")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Club,
-            rank = CardRank.King,
-            sprite = Resources.Load<Sprite>("Sprites/Kclub")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Club,
-            rank = CardRank.Ace,
-            sprite = Resources.Load<Sprite>("Sprites/Aclub")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Diamond,
-            rank = CardRank.Two,
-            sprite = Resources.Load<Sprite>("Sprites/2diamond")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Diamond,
-            rank = CardRank.Three,
-            sprite = Resources.Load<Sprite>("Sprites/3diamond")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Diamond,
-            rank = CardRank.Four,
-            sprite = Resources.Load<Sprite>("Sprites/4diamond")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Diamond,
-            rank = CardRank.Five,
-            sprite = Resources.Load<Sprite>("Sprites/5diamond")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Diamond,
-            rank = CardRank.Six,
-            sprite = Resources.Load<Sprite>("Sprites/6diamond")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Diamond,
-            rank = CardRank.Seven,
-            sprite = Resources.Load<Sprite>("Sprites/7diamond")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Diamond,
-            rank = CardRank.Eight,
-            sprite = Resources.Load<Sprite>("Sprites/8diamond")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Diamond,
-            rank = CardRank.Nine,
-            sprite = Resources.Load<Sprite>("Sprites/9diamond")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Diamond,
-            rank = CardRank.Ten,
-            sprite = Resources.Load<Sprite>("Sprites/10diamond")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Diamond,
-            rank = CardRank.Jack,
-            sprite = Resources.Load<Sprite>("Sprites/Jdiamond")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Diamond,
-            rank = CardRank.Queen,
-            sprite = Resources.Load<Sprite>("Sprites/Qdiamond")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Diamond,
-            rank = CardRank.King,
-            sprite = Resources.Load<Sprite>("Sprites/Kdiamond")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Diamond,
-            rank = CardRank.Ace,
-            sprite = Resources.Load<Sprite>("Sprites/Adiamond")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Heart,
-            rank = CardRank.Two,
-            sprite = Resources.Load<Sprite>("Sprites/2heart")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Heart,
-            rank = CardRank.Three,
-            sprite = Resources.Load<Sprite>("Sprites/3heart")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Heart,
-            rank = CardRank.Four,
-            sprite = Resources.Load<Sprite>("Sprites/4heart")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Heart,
-            rank = CardRank.Five,
-            sprite = Resources.Load<Sprite>("Sprites/5heart")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Heart,
-            rank = CardRank.Six,
-            sprite = Resources.Load<Sprite>("Sprites/6heart")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Heart,
-            rank = CardRank.Seven,
-            sprite = Resources.Load<Sprite>("Sprites/7heart")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Heart,
-            rank = CardRank.Eight,
-            sprite = Resources.Load<Sprite>("Sprites/8heart")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Heart,
-            rank = CardRank.Nine,
-            sprite = Resources.Load<Sprite>("Sprites/9heart")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Heart,
-            rank = CardRank.Ten,
-            sprite = Resources.Load<Sprite>("Sprites/10heart")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Heart,
-            rank = CardRank.Jack,
-            sprite = Resources.Load<Sprite>("Sprites/Jheart")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Heart,
-            rank = CardRank.Queen,
-            sprite = Resources.Load<Sprite>("Sprites/Qheart")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Heart,
-            rank = CardRank.King,
-            sprite = Resources.Load<Sprite>("Sprites/Kheart")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Heart,
-            rank = CardRank.Ace,
-            sprite = Resources.Load<Sprite>("Sprites/Aheart")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Spade,
-            rank = CardRank.Two,
-            sprite = Resources.Load<Sprite>("Sprites/2spade")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Spade,
-            rank = CardRank.Three,
-            sprite = Resources.Load<Sprite>("Sprites/3spade")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Spade,
-            rank = CardRank.Four,
-            sprite = Resources.Load<Sprite>("Sprites/4spade")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Spade,
-            rank = CardRank.Five,
-            sprite = Resources.Load<Sprite>("Sprites/5spade")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Spade,
-            rank = CardRank.Six,
-            sprite = Resources.Load<Sprite>("Sprites/6spade")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Spade,
-            rank = CardRank.Seven,
-            sprite = Resources.Load<Sprite>("Sprites/7spade")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Spade,
-            rank = CardRank.Eight,
-            sprite = Resources.Load<Sprite>("Sprites/8spade")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Spade,
-            rank = CardRank.Nine,
-            sprite = Resources.Load<Sprite>("Sprites/9spade")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Spade,
-            rank = CardRank.Ten,
-            sprite = Resources.Load<Sprite>("Sprites/10spade")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Spade,
-            rank = CardRank.Jack,
-            sprite = Resources.Load<Sprite>("Sprites/Jspade")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Spade,
-            rank = CardRank.Queen,
-            sprite = Resources.Load<Sprite>("Sprites/Qspade")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Spade,
-            rank = CardRank.King,
-            sprite = Resources.Load<Sprite>("Sprites/Kspade")
-        });
-        cards.Add(new CardData
-        {
-            suit = CardSuit.Spade,
-            rank = CardRank.Ace,
-            sprite = Resources.Load<Sprite>("Sprites/Aspade")
-        });
-        
-    }
     
+    #region Hide data
+     private void OnEnable()
+     {
+         if (cards == null || cards.Count == 0)
+         {
+             Init();
+         }
+     }
+    
+     public void Init()
+     {
+         cards.Add(new CardData
+         {
+             content = Content.Back,
+             sprite = Resources.Load<Sprite>("Sprites/Card_pack/Card_Back")
+         });
+         cards.Add(new CardData
+         {
+             content = Content.Penguin,
+             sprite = Resources.Load<Sprite>("Sprites/Card_pack/Card_001")
+         });
+         cards.Add(new CardData
+         {
+             content = Content.Sheep,
+             sprite = Resources.Load<Sprite>("Sprites/Card_pack/Card_002")
+         });
+         cards.Add(new CardData
+         {
+             content = Content.Capybara,
+             sprite = Resources.Load<Sprite>("Sprites/Card_pack/Card_003")
+         });
+         cards.Add(new CardData
+         {
+             content = Content.Rabbit,
+             sprite = Resources.Load<Sprite>("Sprites/Card_pack/Card_004")
+         });
+         cards.Add(new CardData
+         {
+             content = Content.Chicken,
+             sprite = Resources.Load<Sprite>("Sprites/Card_pack/Card_005")
+         });
+         cards.Add(new CardData
+         {
+             content = Content.Cat,
+             sprite = Resources.Load<Sprite>("Sprites/Card_pack/Card_006")
+         });
+         cards.Add(new CardData
+         {
+             content = Content.Jellyfish,
+             sprite = Resources.Load<Sprite>("Sprites/Card_pack/Card_007")
+         });
+         cards.Add(new CardData
+         {
+             content = Content.Whale,
+             sprite = Resources.Load<Sprite>("Sprites/Card_pack/Card_008")
+         });
+         cards.Add(new CardData
+         {
+             content = Content.Monkey,
+             sprite = Resources.Load<Sprite>("Sprites/Card_pack/Card_009")
+         });
+         cards.Add(new CardData
+         {
+             content = Content.Snake,
+             sprite = Resources.Load<Sprite>("Sprites/Card_pack/Card_010")
+         });
+         cards.Add(new CardData
+         {
+             content = Content.Dog,
+             sprite = Resources.Load<Sprite>("Sprites/Card_pack/Card_011")
+         });
+         cards.Add(new CardData
+         {
+             content = Content.Hedgehog,
+             sprite = Resources.Load<Sprite>("Sprites/Card_pack/Card_012")
+         });
+         cards.Add(new CardData
+         {
+             content = Content.Turtle,
+             sprite = Resources.Load<Sprite>("Sprites/Card_pack/Card_013")
+         });
+         cards.Add(new CardData
+         {
+             content = Content.Giraffe,
+             sprite = Resources.Load<Sprite>("Sprites/Card_pack/Card_014")
+         });
+         cards.Add(new CardData
+         {
+             content = Content.Rat,
+             sprite = Resources.Load<Sprite>("Sprites/Card_pack/Card_015")
+         });
+         cards.Add(new CardData
+         {
+             content = Content.Hippo,
+             sprite = Resources.Load<Sprite>("Sprites/Card_pack/Card_016")
+         });
+         cards.Add(new CardData
+         {
+             content = Content.Fox,
+             sprite = Resources.Load<Sprite>("Sprites/Card_pack/Card_017")
+         });
+         cards.Add(new CardData
+         {
+             content = Content.Unicorn,
+             sprite = Resources.Load<Sprite>("Sprites/Card_pack/Card_018")
+         });
+         cards.Add(new CardData
+         {
+             content = Content.Dragon,
+             sprite = Resources.Load<Sprite>("Sprites/Card_pack/Card_019")
+         });
+     }
+    
+    #endregion
 }

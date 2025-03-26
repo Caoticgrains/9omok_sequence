@@ -1,14 +1,19 @@
 ﻿using System;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 
 
-public enum CardSuit { Club, Diamond, Heart, Spade }
-public enum CardRank { Two = 2, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King, Ace } 
+public enum Content { Back = 0, 
+    Penguin = 1, Sheep = 2, Capybara = 3, Rabbit = 4, 
+    Chicken = 5, Cat = 6, Jellyfish = 7, Whale = 8,
+    Monkey = 9, Snake = 10, Dog = 11, Hedgehog = 12, 
+    Turtle = 13, Giraffe = 14, Rat = 15, Hippo = 16, Fox = 17, 
+    Unicorn = 18, Dragon = 19, 
+    Max = 20 } 
 
 [Serializable]
-public struct CardData
+public class CardData
 {
-    public CardSuit suit;
-    public CardRank rank;
+    public Content content;
     public Sprite sprite;
 }

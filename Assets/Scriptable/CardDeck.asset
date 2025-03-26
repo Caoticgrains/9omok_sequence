@@ -13,159 +13,43 @@ MonoBehaviour:
   m_Name: CardDeck
   m_EditorClassIdentifier: 
   cards:
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
-  - suit: 0
-    rank: 0
-    sprite: {fileID: 0}
+  - content: 0
+    sprite: {fileID: 21300000, guid: 6f6917d3929e78546938701fff5dd2ec, type: 3}
+  - content: 1
+    sprite: {fileID: 21300000, guid: 42a7ccd6459fafe488393833bf0fbcb8, type: 3}
+  - content: 2
+    sprite: {fileID: 21300000, guid: f5ea6503de8201042a4d8948de4a3111, type: 3}
+  - content: 3
+    sprite: {fileID: 21300000, guid: a1f06186897efed4981509b108e9a245, type: 3}
+  - content: 4
+    sprite: {fileID: 21300000, guid: 07b710d6769ff6845b608ef92002ada8, type: 3}
+  - content: 5
+    sprite: {fileID: 21300000, guid: 1e3d6ce99442c8542b975ee433abc9c0, type: 3}
+  - content: 6
+    sprite: {fileID: 21300000, guid: 40c309a887f47cf49abadbe633c47661, type: 3}
+  - content: 7
+    sprite: {fileID: 21300000, guid: c523360c87f32aa468ad3457422bffb6, type: 3}
+  - content: 8
+    sprite: {fileID: 21300000, guid: 71aedf4442b9191428afa591cc05af75, type: 3}
+  - content: 9
+    sprite: {fileID: 21300000, guid: 96ddcaee30864ec4e9211d0e31dd91b0, type: 3}
+  - content: 10
+    sprite: {fileID: 21300000, guid: d65052a723e699e44890a3b3058633fc, type: 3}
+  - content: 11
+    sprite: {fileID: 21300000, guid: 39fb97a696ecaa44da2fec4247140adb, type: 3}
+  - content: 12
+    sprite: {fileID: 21300000, guid: 12b2c47c893eadf46975ea30b52bdab3, type: 3}
+  - content: 13
+    sprite: {fileID: 21300000, guid: f9194b4080cfca44cb48a3849a88b5a5, type: 3}
+  - content: 14
+    sprite: {fileID: 21300000, guid: 3011071962ee2ae408c9f3b2b6c0e629, type: 3}
+  - content: 15
+    sprite: {fileID: 21300000, guid: d0de78d3897ca8f4289b5bacb0042d76, type: 3}
+  - content: 16
+    sprite: {fileID: 21300000, guid: ee2f0a45908711c448f3ad7d74d4c042, type: 3}
+  - content: 17
+    sprite: {fileID: 21300000, guid: 3130c19a79584b543a43add39cbce82a, type: 3}
+  - content: 18
+    sprite: {fileID: 21300000, guid: b9fd6cdca238a0b43946029fbca8bcbd, type: 3}
+  - content: 19
+    sprite: {fileID: 21300000, guid: ac600c8f90c77d64ba51ff6d1f61324a, type: 3}
