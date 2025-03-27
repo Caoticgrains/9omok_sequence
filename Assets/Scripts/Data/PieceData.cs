@@ -1,25 +1,37 @@
 ﻿using System;
 using UnityEngine;
 
-public enum PlayerType { P1, P2 }
 
-[Serializable]
-public struct PieceData
+namespace Data
 {
-    public Vector2Int pos;
-    public PlayerType type;
-    public bool isPlaced;
-    
-    public PieceData(Vector2Int pos, PlayerType type, bool isPlaced = false)
+
+
+
+    public enum PlayerType
     {
-        this.pos = pos;
-        this.type = type;
-        this.isPlaced = isPlaced;
+        P1,
+        P2
     }
 
-    public PieceData SetPlaced()
+    [Serializable]
+    public struct PieceData
     {
-        return new PieceData(pos, type, true);
+        public Vector2Int pos;
+        public PlayerType type;
+        public bool isPlaced;
+
+        public PieceData(Vector2Int pos, PlayerType type, bool isPlaced = false)
+        {
+            this.pos = pos;
+            this.type = type;
+            this.isPlaced = isPlaced;
+        }
+
+        public PieceData SetPlaced()
+        {
+            return new PieceData(pos, type, true);
+        }
+
     }
-    
+
 }

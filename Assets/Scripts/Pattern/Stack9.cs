@@ -1,54 +1,59 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Stack9<T> : MonoBehaviour 
+namespace Pattern
 {
-    public List<T> _items = new();
 
-    public void Push(T obj)
-    {
-        _items.Add(obj);
-    }
 
-    public T Pop()
+    public class Stack9<T> : MonoBehaviour
     {
-        if (_items.Count > 0)
+        public List<T> _items = new();
+
+        public void Push(T obj)
         {
-            T obj = _items[^1];
-            _items.RemoveAt(_items.Count - 1);
-            return obj;
+            _items.Add(obj);
         }
-        else
-        {
-            throw new System.Exception("Stack is empty");
-        }
-    }
-    
-    public bool IsEmpty()
-    {
-        return _items.Count == 0;
-    }
 
-    public T Peek()
-    {
-        if (_items.Count > 0)
+        public T Pop()
         {
-            return _items[^1];
+            if (_items.Count > 0)
+            {
+                T obj = _items[^1];
+                _items.RemoveAt(_items.Count - 1);
+                return obj;
+            }
+            else
+            {
+                throw new System.Exception("Stack is empty");
+            }
         }
-        else
+
+        public bool IsEmpty()
         {
-            throw new System.Exception("Stack is empty");
+            return _items.Count == 0;
         }
-    }
 
-    public int Count()
-    {
-        return _items.Count;
-    }
+        public T Peek()
+        {
+            if (_items.Count > 0)
+            {
+                return _items[^1];
+            }
+            else
+            {
+                throw new System.Exception("Stack is empty");
+            }
+        }
 
-    public void Clear()
-    {
-        _items.Clear();
+        public int Count()
+        {
+            return _items.Count;
+        }
+
+        public void Clear()
+        {
+            _items.Clear();
+        }
+
     }
-    
 }

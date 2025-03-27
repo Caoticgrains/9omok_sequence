@@ -1,21 +1,29 @@
 ﻿using System;
+using Data;
+using Pattern;
 using UnityEngine;
 
-public class CardStack : Stack9<CardData>
+namespace Data
 {
-    public static CardStack Instance { get; private set; }
 
-    public void Awake()
+
+
+    public class CardStack : Stack9<CardData>
     {
-        if(Instance == null)
-            Instance = this;
-    }
+        public static CardStack Instance { get; private set; }
 
-    public void AddToStack(CardData data)
-    {
-        Push(data);
-        Debug.Log($"카드 { data.content.ToString() } , { data.sprite.name } 이(가) 버려짐");
-    }
-    
+        public void Awake()
+        {
+            if (Instance == null)
+                Instance = this;
+        }
 
+        public void AddToStack(CardData data)
+        {
+            Push(data);
+            Debug.Log($"카드 {data.content.ToString()} , {data.sprite.name} 이(가) 버려짐");
+        }
+
+
+    }
 }

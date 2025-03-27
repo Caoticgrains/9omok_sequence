@@ -1,19 +1,27 @@
-﻿using UnityEngine;
+﻿using Data;
+using UnityEngine;
 
-public class Piece : MonoBehaviour
+
+namespace Component.Content
 {
-    private PieceData _pieceData;
-    private SpriteRenderer _spriteRenderer;
-    private PieceFilter _filter;
-    
-    private void Awake()
-    {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-    }
 
-    public void Initialize(PieceData pieceData)
+
+
+    public class Piece : MonoBehaviour
     {
-        _pieceData = pieceData;
-        _spriteRenderer.color = _pieceData.type == PlayerType.P1 ? Color.black : Color.white;
+        private PieceData _pieceData;
+        private SpriteRenderer _spriteRenderer;
+        private PieceFilter _filter;
+
+        private void Awake()
+        {
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+        }
+
+        public void Initialize(PieceData pieceData)
+        {
+            _pieceData = pieceData;
+            _spriteRenderer.color = _pieceData.type == PlayerType.P1 ? Color.black : Color.white;
+        }
     }
 }

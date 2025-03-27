@@ -3,43 +3,44 @@ using UnityEngine;
 
 namespace Pattern
 {
-    public class ObjectPool<T> where T : MonoBehaviour
+    public class ObjectPool9 : MonoBehaviour
     {
-        private Queue<T> _pool = new Queue<T>();
-        private T _prefab;
+        private Queue<GameObject> _pool = new Queue<GameObject>();
+        private GameObject _prefab;
         private Transform _parent;
+        private int _size;
 
-        public ObjectPool(T prefab, int initialSize, Transform parent = null)
+        public void Initialize(GameObject prefab, int initialSize, Transform parent = null)
         {
             _prefab = prefab;
             _parent = parent;
-        
+            _size = initialSize;
+
             for (int i = 0; i < initialSize; i++)
             {
-                T obj = GameObject.Instantiate(_prefab, _parent);
-                obj.gameObject.SetActive(false);
+                GameObject obj = Instantiate(_prefab, _parent);
+                obj.SetActive(false);
                 _pool.Enqueue(obj);
             }
         }
 
-        public T Get()
+        public GameObject GetObj()
         {
             if (_pool.Count > 0)
             {
-                T obj = _pool.Dequeue();
-                obj.gameObject.SetActive(true);
+                GameObject obj = _pool.Dequeue();
+                obj.SetActive(true);
                 return obj;
             }
             else
             {
-                T obj = Object.Instantiate(_prefab, _parent);
-                return obj;
+                return Instantiate(_prefab, _parent);
             }
         }
 
-        public void Return(T obj)
+        public void ReturnObj(GameObject obj)
         {
-            obj.gameObject.SetActive(false);
+            obj.SetActive(false);
             _pool.Enqueue(obj);
         }
     }

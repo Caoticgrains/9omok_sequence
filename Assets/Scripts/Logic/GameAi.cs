@@ -1,4 +1,11 @@
-﻿public class GameAi
+﻿
+namespace Logic
 {
-    // Ai 입니다. 
+
+
+
+    public class GameAi
+    {
+        // Ai 입니다. 
+    }
 }

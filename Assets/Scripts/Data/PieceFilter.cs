@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Data;
 using UnityEngine;
 
 public class PieceFilter
@@ -39,9 +40,6 @@ public class PieceFilter
                 renderer.color *= 0.5f;
             }
         }
-        
-        //Resources.Load<Sprite>("Sprites/Gem/Blue_gem")
-        //Resources.Load<Sprite>("Sprites/Gem/Pink_gem")
         
         Debug.Log($"임시 배치: {piece.name} / 위치: {position} / 인덱스: {PositionToIndex(position)}");
         

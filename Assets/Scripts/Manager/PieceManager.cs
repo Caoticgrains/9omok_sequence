@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 
-public class PieceManager : MonoBehaviour
+namespace Manager
 {
-    
+    public class PieceManager : MonoBehaviour
+    {
+
+    }
 }
+

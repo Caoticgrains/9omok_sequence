@@ -1,4 +1,11 @@
-﻿public class GameLogic
+﻿
+namespace Logic
 {
-    // 로직입니다. 
+
+
+
+    public class GameLogic
+    {
+        // 로직입니다. 
+    }
 }

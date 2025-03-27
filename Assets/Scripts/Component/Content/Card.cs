@@ -1,20 +1,28 @@
 ﻿using System;
+using Data;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Card : MonoBehaviour
+namespace Component.Content
 {
-    private Image _cardImage;
-    private CardData _cardData;
 
-    private void Awake()
+
+
+    public class Card : MonoBehaviour
     {
-        _cardImage = GetComponent<Image>();
+        private Image _cardImage;
+        private CardData _cardData;
+
+        private void Awake()
+        {
+            _cardImage = GetComponent<Image>();
+        }
+
+        public void Initialize(CardData cardData)
+        {
+            _cardData = cardData;
+            _cardImage.sprite = _cardData.sprite;
+        }
     }
 
-    public void Initialize(CardData cardData)
-    {
-        _cardData = cardData;
-        _cardImage.sprite = _cardData.sprite;
-    }
 }
