@@ -169,20 +169,7 @@ public partial class Board : MonoBehaviour
 
     
     
-// void SpawnBoardCards()
-// {
-//     for (int i = 0; i < 8; i++)
-//     {
-//         for (int j = 0; j < 8; j++)
-//         {
-//             Vector3 position = new Vector3(i * 2, j * 2, 0); // 타일맵에서 위치를 가져다가 넘긴다. 
-//             GameObject newCard = objectPool.GetObj();
-//             //newCard.GetComponent<CardData>().SetCardValue(board[i, j]);
-//
-//             _cardObjects[new Vector2Int(i, j)] = newCard;
-//         }
-//     }
-// }
+
 // void SpawnCards()
 // {
 //     foreach (CardData cardData in deck.cards)
@@ -269,22 +256,26 @@ public partial class Board : MonoBehaviour
         Debug.Log($"플레이어 {playerIndex + 1} 선택됨");
     }
     
+    // public void ReturnBoardData()
+    // {
+    //     // card
+    //     foreach (Transform child in tileParent)
+    //     {
+    //         ObjectPoolManager.Instance.ReturnBoardCard(card);
+    //     }
+    //     
+    //     
+    //     
+    //     // piece 
+    //     foreach (Transform child in cardParent)
+    //     {
+    //         ObjectPoolManager.Instance.ReturnPiece(piece);
+    //     }
+    // }
+    
 }
 
-//public void ReturnTilesAndCards()
-//{
-    // 타일 반환
-    // foreach (Transform child in tileParent)
-    // {
-    //     tilePool.ReturnObj(child.gameObject);
-    // }
-    //
-    // // 카드 반환
-    // foreach (Transform child in cardParent)
-    // {
-    //     cardPool.ReturnObj(child.gameObject);
-    // }
-//}
+
     
 // void EndGame()
 // {

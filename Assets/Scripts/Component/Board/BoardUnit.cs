@@ -32,7 +32,6 @@ public class BoardUnit : MonoBehaviour
         
         _pieceImage = GetComponent<Image>();
         _pieceImage.sprite = cardData.sprite;
-        
     }
     
     private void OnMouseDown()

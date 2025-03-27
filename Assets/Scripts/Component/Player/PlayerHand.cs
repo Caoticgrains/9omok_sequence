@@ -34,8 +34,8 @@ public class PlayerHand : MonoBehaviour
             Debug.Log("Card Deck is already initialized");
             return;
         }
+
         _cardDeck = ScriptableObject.CreateInstance<CardDeck>();
-        
     }
     
     void DrawInitHand()

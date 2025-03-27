@@ -4,7 +4,8 @@ public class Piece : MonoBehaviour
 {
     private PieceData _pieceData;
     private SpriteRenderer _spriteRenderer;
-
+    private PieceFilter _filter;
+    
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
