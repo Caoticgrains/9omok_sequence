@@ -3,8 +3,6 @@ using UnityEngine;
 
 namespace Pattern
 {
-
-
     public class Stack9<T> : MonoBehaviour
     {
         public List<T> _items = new();
@@ -54,6 +52,5 @@ namespace Pattern
         {
             _items.Clear();
         }
-
     }
 }

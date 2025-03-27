@@ -1,9 +1,6 @@
 ﻿
-
 namespace Common
 {
-
-
     public class Constants
     {
         public enum ModeType

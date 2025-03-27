@@ -4,9 +4,6 @@ using UnityEngine;
 
 namespace Data
 {
-
-
-
     [CreateAssetMenu(fileName = "CardDeck", menuName = "User/CardDeck", order = 0)]
     public class CardDeck : ScriptableObject
     {

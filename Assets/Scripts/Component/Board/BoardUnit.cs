@@ -7,18 +7,14 @@ using UnityEngine.UI;
 
 namespace Component.Board
 {
-
-
     public class BoardUnit : MonoBehaviour
     {
         private Vector2Int _boardIndex;
-
-        private GameObject _cardObject;
+        
         private Transform _cardParent;
         private Image _cardImage;
         private CardData _cardData;
-
-        private GameObject _pieceObject;
+        
         private Transform _pieceParent;
         private Image _pieceImage;
         private PieceData _pieceData;

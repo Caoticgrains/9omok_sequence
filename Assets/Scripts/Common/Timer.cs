@@ -3,8 +3,6 @@ using UnityEngine;
 
 namespace Common
 {
-
-
     public class Timer : MonoBehaviour
     {
         // [SerializeField] private Image fillImage;
@@ -88,6 +86,5 @@ namespace Common
         //     tailCapImage.gameObject.SetActive(true);
         //     isPaused = true;
         // }
-
     }
 }

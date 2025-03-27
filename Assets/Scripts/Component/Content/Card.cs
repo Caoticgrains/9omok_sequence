@@ -5,24 +5,20 @@ using UnityEngine.UI;
 
 namespace Component.Content
 {
-
-
-
     public class Card : MonoBehaviour
     {
-        private Image _cardImage;
         private CardData _cardData;
+        private Image _image;
 
         private void Awake()
         {
-            _cardImage = GetComponent<Image>();
+            _image = GetComponent<Image>();
         }
 
         public void Initialize(CardData cardData)
         {
             _cardData = cardData;
-            _cardImage.sprite = _cardData.sprite;
+            _image.sprite = _cardData.sprite;
         }
     }
-
 }

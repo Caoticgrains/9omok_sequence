@@ -5,7 +5,6 @@ using Pattern;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 namespace Manager
 {
     public class GameManager : Singleton9<GameManager>
@@ -76,13 +75,10 @@ namespace Manager
             if (eGameType != Type)
                 eGameType = Type;
         }
-
-
-
+        
         void EndGame()
         {
 
         }
-
     }
 }

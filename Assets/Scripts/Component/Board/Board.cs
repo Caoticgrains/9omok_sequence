@@ -13,15 +13,7 @@ using UnityEngine.UI;
 
 namespace Component.Board
 {
-
-
-
-    public enum Owner
-    {
-        None,
-        P1,
-        P2
-    }
+    public enum Owner { None, P1, P2 }
 
     [Serializable]
     public class BoardTile
@@ -36,7 +28,7 @@ namespace Component.Board
         }
     }
 
-    public partial class Board : MonoBehaviour
+    public class Board : MonoBehaviour
     {
         // turn
         private Owner _owner;
@@ -74,10 +66,8 @@ namespace Component.Board
 
         // delegate
         public delegate void OnBoardClicked(int row, int column);
-
         public OnBoardClicked OnBoardClickedDelegate;
-
-
+        
         void Start()
         {
             PlayerSelected();
@@ -164,7 +154,7 @@ namespace Component.Board
 
                     // init
                     _boardTileArr[i, j] = new BoardTile(_owner, unit);
-                    CalTileGroupCenterInPanel(_boardTileArr, boardPanelRectTransform);
+                   // CalTileGroupCenterInPanel(_boardTileArr, boardPanelRectTransform);
                 }
             }
         }
@@ -199,10 +189,6 @@ namespace Component.Board
 //     }
 // }
 //
-
-
-
-
         private Vector3 CalIndexToPos(int index)
         {
             int row = index / _boardSize.x;

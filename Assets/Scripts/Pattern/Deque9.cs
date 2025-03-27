@@ -5,8 +5,6 @@ using UnityEngine;
 
 namespace Pattern
 {
-
-
     public class Deque9<T> : MonoBehaviour where T : MonoBehaviour
     {
         private LinkedList<T> items = new LinkedList<T>();
@@ -60,5 +58,4 @@ namespace Pattern
         public bool IsEmpty() => items.Count == 0;
         public int Count => items.Count;
     }
-
 }

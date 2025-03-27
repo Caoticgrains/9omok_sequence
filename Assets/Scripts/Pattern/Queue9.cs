@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 namespace Pattern
 {
-    
-
     public class Queue9<T> : MonoBehaviour where T : MonoBehaviour
     {
         private List<T> items = new List<T>();

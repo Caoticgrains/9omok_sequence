@@ -5,9 +5,6 @@ using UnityEngine.SceneManagement;
 
 namespace Pattern
 {
-
-
-
     public abstract class Singleton9<T> : MonoBehaviour where T : MonoBehaviour
     {
         private static T _instance;

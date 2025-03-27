@@ -1,27 +1,23 @@
 ﻿using Data;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 namespace Component.Content
 {
-
-
-
     public class Piece : MonoBehaviour
     {
         private PieceData _pieceData;
-        private SpriteRenderer _spriteRenderer;
-        private PieceFilter _filter;
+        private Image _image;
 
         private void Awake()
         {
-            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _image = GetComponent<Image>();
         }
-
+        
         public void Initialize(PieceData pieceData)
         {
             _pieceData = pieceData;
-            _spriteRenderer.color = _pieceData.type == PlayerType.P1 ? Color.black : Color.white;
+            _image.color = _pieceData.type == PlayerType.P1 ? Color.black : Color.white;
         }
     }
 }

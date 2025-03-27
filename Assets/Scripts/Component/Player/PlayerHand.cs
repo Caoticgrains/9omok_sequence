@@ -8,16 +8,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-/// <summary>
-/// Player는 7장의 랜덤한 카드를 가짐
-/// Player는 기존카드를 버리고 새로운 카드를 추가하여 7장을 유지 
-/// </summary>
-
 namespace Component.Player
 {
-
-
-
     public class PlayerHand : MonoBehaviour
     {
         [SerializeField] private GameObject cardPrefab;

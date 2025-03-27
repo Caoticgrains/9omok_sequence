@@ -4,9 +4,6 @@ using UnityEngine;
 
 namespace Data
 {
-
-
-
     public enum Content
     {
         Back = 0,

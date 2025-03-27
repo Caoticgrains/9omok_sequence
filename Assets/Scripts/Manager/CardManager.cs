@@ -1,7 +1,6 @@
 ﻿using Data;
 using UnityEngine;
 
-
 namespace Manager
 {
     public class CardManager : MonoBehaviour
@@ -29,8 +28,6 @@ namespace Manager
             //         Debug.Log($" {card.content.ToString()} , {card.sprite.name} ");
             //     }
             // }
-
-
         }
     }
 }

@@ -4,9 +4,6 @@ using UnityEngine;
 
 namespace Data
 {
-
-
-
     public enum PlayerType
     {
         P1,
@@ -33,5 +30,4 @@ namespace Data
         }
 
     }
-
 }
