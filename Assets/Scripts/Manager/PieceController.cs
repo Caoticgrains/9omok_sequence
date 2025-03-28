@@ -2,7 +2,7 @@
 
 namespace Manager
 {
-    public class PieceManager : MonoBehaviour
+    public class PieceController : MonoBehaviour
     {
 
     }

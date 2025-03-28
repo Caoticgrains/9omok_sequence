@@ -121,6 +121,11 @@ namespace Data
                 content = Content.Dragon,
                 sprite = Resources.Load<Sprite>("Sprites/Card_pack/Card_019")
             });
+            cards.Add(new CardData
+            {
+                content = Content.WildSpace,
+                sprite = Resources.Load<Sprite>("Sprites/Card_pack/Card_Wild")
+            });
         }
 
         #endregion

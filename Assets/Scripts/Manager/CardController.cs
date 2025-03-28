@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Manager
 {
-    public class CardManager : MonoBehaviour
+    public class CardController : MonoBehaviour
     {
         private CardStack _stack;
 

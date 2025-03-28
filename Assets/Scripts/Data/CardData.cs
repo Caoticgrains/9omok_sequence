@@ -26,7 +26,8 @@ namespace Data
         Fox = 17,
         Unicorn = 18,
         Dragon = 19,
-        Max = 20
+        WildSpace = 20,
+        Max = 21
     }
 
     [Serializable]

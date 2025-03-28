@@ -10,19 +10,18 @@ namespace Component.Board
     public class BoardUnit : MonoBehaviour
     {
         private Vector2Int _boardIndex;
+        private Transform _transform;
         
-        private Transform _cardParent;
         private Image _cardImage;
         private CardData _cardData;
         
-        private Transform _pieceParent;
         private Image _pieceImage;
         private PieceData _pieceData;
 
         public delegate void OnBoardUnitClicked();
 
         private OnBoardUnitClicked _onBoardUnitClickedDelegate;
-
+        
         public void Initialize(Vector2Int index, CardData cardData, OnBoardUnitClicked onBoardUnitClicked)
         {
             this._boardIndex = index;

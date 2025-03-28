@@ -1,23 +1,23 @@
 ﻿using System;
 using UnityEngine;
 
-
 namespace Data
 {
-    public enum PlayerType
+    public enum ColorType
     {
+        None,
         P1,
         P2
     }
-
+    
     [Serializable]
     public struct PieceData
     {
         public Vector2Int pos;
-        public PlayerType type;
+        public ColorType type;
         public bool isPlaced;
 
-        public PieceData(Vector2Int pos, PlayerType type, bool isPlaced = false)
+        public PieceData(Vector2Int pos, ColorType type, bool isPlaced = false)
         {
             this.pos = pos;
             this.type = type;

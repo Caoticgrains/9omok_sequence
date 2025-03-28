@@ -32,6 +32,7 @@ namespace Common
 
         public const int cardMaxCountOnPlayerHand = 7;
         public const int pieceMaxCountOnPlayerHand = 40;
+        public const int bannerMaxCountOnGround = 10;
 
     }
 }

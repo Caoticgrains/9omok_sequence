@@ -40,12 +40,35 @@ namespace Manager
         }
 
         public GameType eGameType = GameType.Intro;
-
+        
         void Start()
         {
             //Board.CreateBoard();
         }
 
+        // SceneManager.LoadScene("Main");
+
+        private void OnApplicationQuit()
+        {
+            
+        }
+
+        public void AllClear()
+        {
+            
+        }
+ 
+        // var lastRow = _visibleCells.Last();
+        //     if (!IsVisibleIndex(lastRow.index))
+        // {
+        //     var stageCellButtons = lastRow.stageCellButtons;
+        //     foreach (var stageCellButton in stageCellButtons)
+        //     {
+        //         ObjectPool.Instance.ReturnObj(stageCellButton.gameObject);
+        //     }
+        //     _visibleCells.RemoveAt(_visibleCells.Count - 1);
+        // }
+        
         void Update()
         {
             switch (eGameType)
