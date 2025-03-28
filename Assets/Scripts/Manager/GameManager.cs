@@ -1,0 +1,107 @@
+using System.Collections;
+using System.Collections.Generic;
+using Component.Board;
+using Pattern;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+namespace Manager
+{
+    public class GameManager : Singleton9<GameManager>
+    {
+        #region manager-active
+
+        private Board _board;
+
+        public Board Board
+        {
+            get
+            {
+                if (_board == null)
+                    _board = FindObjectOfType<Board>(true);
+                return _board;
+            }
+        }
+
+        #endregion
+
+        protected override void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            //throw new System.NotImplementedException();
+        }
+
+        public enum GameType
+        {
+            Intro,
+            MainMenu,
+            Build,
+            Play,
+            Outro
+        }
+
+        public GameType eGameType = GameType.Intro;
+        
+        void Start()
+        {
+            //Board.CreateBoard();
+        }
+
+        // SceneManager.LoadScene("Main");
+
+        private void OnApplicationQuit()
+        {
+            
+        }
+
+        public void AllClear()
+        {
+            
+        }
+ 
+        // var lastRow = _visibleCells.Last();
+        //     if (!IsVisibleIndex(lastRow.index))
+        // {
+        //     var stageCellButtons = lastRow.stageCellButtons;
+        //     foreach (var stageCellButton in stageCellButtons)
+        //     {
+        //         ObjectPool.Instance.ReturnObj(stageCellButton.gameObject);
+        //     }
+        //     _visibleCells.RemoveAt(_visibleCells.Count - 1);
+        // }
+        
+        void Update()
+        {
+            switch (eGameType)
+            {
+                case GameType.Intro:
+                    // 
+                    break;
+                case GameType.MainMenu:
+                    // 
+                    break;
+                case GameType.Build:
+                    // Board.RayToBoard();
+                    break;
+                case GameType.Play:
+                    // 
+                    break;
+                case GameType.Outro:
+
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public void OnChangeType(GameType Type)
+        {
+            if (eGameType != Type)
+                eGameType = Type;
+        }
+        
+        void EndGame()
+        {
+
+        }
+    }
+}
