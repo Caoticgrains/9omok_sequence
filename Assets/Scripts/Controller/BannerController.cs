@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Content;
 using UnityEngine;
 
-namespace Manager
+namespace Controller
 {
     public class BannerController : MonoBehaviour
     {
+        
     }
 }

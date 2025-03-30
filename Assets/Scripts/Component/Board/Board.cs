@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Component.Board;
-using Component.Content;
 using Cysharp.Threading.Tasks;
 using Data;
 using Manager;
@@ -30,10 +29,11 @@ namespace Component.Board
 
     public class Board : MonoBehaviour
     {
-        // turn
+        // Tile 
         private Owner _owner;
-
-        // board tile 
+        private BoardUnit _unit;
+        
+        // board tile Array
         private BoardTile[,] _boardTileArr;
 
         // board size 
@@ -52,25 +52,18 @@ namespace Component.Board
         private bool _isPlaced;
 
         // card prefab setting
-        private CardDeck _cardDeck;
+        private CardFilter _cardFilter;
 
         // piece prefab setting;
-        private readonly PieceFilter _pieceFilter = new PieceFilter();
-
-        // Place card setting on board
-        private Dictionary<Vector2Int, Card> _cardOnBoard = new();
-
-        // Place Piece setting on board
-        private readonly Dictionary<Vector2Int, Piece> _pieceOnBoard = new();
+        private PieceFilter _pieceFilter;
+        
+        // data
+        private Dictionary<Vector2Int, GameObject> _cardOnBoard = new();
+        private Dictionary<Vector2Int, GameObject> _pieceOnBoard = new();
 
         // delegate
         public delegate void OnBoardClicked(int row, int column);
         public OnBoardClicked OnBoardClickedDelegate;
-
-        // public Board(BoardTile[,] boardTileArr)
-        // {
-        //     _boardTileArr = boardTileArr;
-        // }
 
         void Start()
         {
@@ -107,6 +100,62 @@ namespace Component.Board
                 selectedPieceButtons[i].onClick.AddListener(() => OnSelectPlayer(j));
             }
         }
+
+        private Vector3 CalculateBoardPosition(Vector2Int position, Transform parent)
+        {
+            return new Vector3(
+                parent.transform.position.x + position.y * 100f - (_boardSize.x * 50f),
+                parent.transform.position.y + -position.x * 100f + (_boardSize.y * 50f),
+                0
+            );
+        }
+        
+        private CardData GetRandomCardData(Vector2Int position)
+        {
+            _cardFilter = ScriptableObject.CreateInstance<CardFilter>();
+            int randomValue = position is { x: 0, y: 0 } ||
+                              position is { x: 0, y: 7 } ||
+                              position is { x: 7, y: 0 } ||
+                              position is { x: 7, y: 7 }
+                ? UnityEngine.Random.Range(20, 21)
+                : UnityEngine.Random.Range(1, 20);
+
+            return _cardFilter.cards[randomValue];
+        }
+
+        private PieceData GetRandomPieceData()
+        {
+            _pieceFilter = ScriptableObject.CreateInstance<PieceFilter>();
+            int pieceValue = UnityEngine.Random.Range(0, 2);
+            return _pieceFilter.pieces[pieceValue];
+        }
+        
+        public BoardUnit CreateBoardUnit(Vector2Int position)
+        {
+            GameObject cardObject = ObjectPoolManager.Instance.GetBoardCard();
+            cardObject.name = $"Card_{position.x}_{position.y}";
+            cardObject.transform.position = CalculateBoardPosition(position, boardCardParent);
+            cardObject.transform.SetParent(boardCardParent);
+            
+            GameObject pieceObject = ObjectPoolManager.Instance.GetPiece();
+            pieceObject.name = $"Piece_{position.x}_{position.y}";
+            pieceObject.transform.position = CalculateBoardPosition(position, boardPieceParent);
+            pieceObject.transform.SetParent(boardPieceParent);
+            
+            CardData cardData = GetRandomCardData(position);
+            PieceData pieceData = GetRandomPieceData();
+            
+            BoardUnit unit = cardObject.AddComponent<BoardUnit>();
+            unit.Initialize(position, cardObject, cardData, pieceObject, pieceData, () =>
+            {
+                Debug.Log("onBoardUnitClicked");
+            });
+            
+            _cardOnBoard[position] = cardObject;
+            _pieceOnBoard[position] = pieceObject;
+
+            return unit;
+        }
         
         public void CreateBoard()
         {
@@ -119,129 +168,13 @@ namespace Component.Board
             {
                 for (int j = 0; j < _boardSize.y; j++)
                 {
-                    // Tile_0_0 Tile_0_7
-                    // Tile_7_0 Tile_7_7    
-                    
-                    Vector2Int index = CalTileToV2Int(i, j);
-                    
-                    // #region ----------------- Piece Part -----------------
-                    // GameObject piece_go = ObjectPoolManager.Instance.GetPiece();
-                    // piece_go.name = $"Piece_{i}_{j}";
-                    // piece_go.transform.position 
-                    //     = new Vector3(
-                    //         boardPieceParent.transform.position.x + j * 100f - (_boardSize.x * 50f),
-                    //         boardPieceParent.transform.position.y + -i * 100f + (_boardSize.y * 50f),
-                    //         0);
-                    // piece_go.transform.SetParent(boardPieceParent);
-                    //
-                    // if (piece_go == null)
-                    // {
-                    //     Debug.LogError("Object Pool is empty!");
-                    //     return;
-                    // }
-                    //
-                    // if (_pieceOnBoard.ContainsKey(index)) return;
-                    //
-                    // Piece piece = piece_go.AddComponent<Piece>();
-                    // PieceData pieceData = _pieceFilter.GetPieceData(_owner);
-                    // piece.Initialize(pieceData);
-                    // _pieceOnBoard[new Vector2Int(i, j)] = piece;
-                    // #endregion
-                    
-
-                    
-                    //piece_go.GetComponent<PieceCase>().Setting();
-                    //piece_go.GetComponent<Image>().sprite = _pieceCase.SetPieceTemp(piece_go, ColorType.None, );
-                    
-                    #region ----------------- Card Part -----------------
-                    GameObject card_go = ObjectPoolManager.Instance.GetBoardCard();
-                    card_go.name = $"Tile_{i}_{j}";
-                    card_go.transform.position 
-                        = new Vector3(
-                            boardCardParent.transform.position.x + j * 100f - (_boardSize.x * 50f),
-                            boardCardParent.transform.position.y + -i * 100f + (_boardSize.y * 50f),
-                            0);
-                    card_go.transform.SetParent(boardCardParent);
-                    
-                    if (card_go == null)
-                    {
-                        Debug.LogError("Object Pool is empty!");
-                        return;
-                    }
-                    
-                    int row = i, column = j;
-                    card_go.AddComponent<BoxCollider2D>();
-                    
-                    // SpawnCardOnTile(new Vector2Int(i, j));
-                    if ((row == 0 && column == 0) ||
-                        (row == 0 && column == 7) ||
-                        (row == 7 && column == 0) ||
-                        (row == 7 && column == 7))
-                    {
-                        int randomValue = UnityEngine.Random.Range(20, 21);
-                        _cardDeck = ScriptableObject.CreateInstance<CardDeck>();
-                        card_go.GetComponent<Image>().sprite = _cardDeck.cards[randomValue].sprite;
-                    }
-                    else
-                    {
-                        int randomValue = UnityEngine.Random.Range(1, 20);
-                        _cardDeck = ScriptableObject.CreateInstance<CardDeck>();
-                        card_go.GetComponent<Image>().sprite = _cardDeck.cards[randomValue].sprite;
-                    }
-                    #endregion
-                    
-                    BoardUnit unit = card_go.AddComponent<BoardUnit>();
-                    _boardTileArr[i, j] = new BoardTile(_owner, unit);
-                    
-                    // closure issue
-                    var i1 = i;
-                    var j1 = j;
-                    
-                    // unit.Initialize(new Vector2Int(i, j), _cardDeck.cards[randomValue], () =>
-                    // {
-                    //     Debug.Log("BoardUnit Setting event triggered");
-                    //     //OnBoardClickedDelegate?.Invoke(i1, j1);
-                    // });
-                    
-                   // CalTileGroupCenterInPanel(_boardTileArr, boardPanelRectTransform);
+                    Vector2Int position = new Vector2Int(i, j);
+                    BoardUnit boardUnit = CreateBoardUnit(position);
+                    _boardTileArr[i,j] = new BoardTile(_owner, boardUnit);
                 }
             }
         }
-
-
-        // private void SpawnCardOnTile(Vector2Int position)
-        // {
-        //     if (ObjectPoolManager.Instance == null) return;
-        //
-        //     Card card = ObjectPoolManager.Instance.GetBoardCard();
-        //     
-        //     card.transform.position = new Vector3(position.x, position.y, 0);
-        //     card.gameObject.SetActive(true);
-        //     
-        //     int randomValue = UnityEngine.Random.Range(1, 20);
-        //     _cardDeck = ScriptableObject.CreateInstance<CardDeck>();
-        //     card.Initialize(_cardDeck.cards[randomValue]);
-        //     
-        //     _cardOnBoard[position] = card;
-        // }
         
-        private Vector3 CalIndexToPos(int index)
-        {
-            int row = index / _boardSize.x;
-            int column = index % _boardSize.x;
-            return new Vector3(row * _boardSize.x, column * _boardSize.y, 0);
-        }
-
-        private Vector2Int CalTileToV2Int(int row, int column)
-        {
-            return new Vector2Int(row, column);
-        }
-
-        private int CalTileToIndex(int row, int column)
-        {
-            return row * _boardSize.x + column;
-        }
-
         public void RayToBoard()
         {
             if (!_isSelected) return;
@@ -252,26 +185,24 @@ namespace Component.Board
 
                 if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
                 {
-
                     BoardUnit boardUnit = hit.transform.GetComponent<BoardUnit>();
 
                     if (boardUnit != null)
                     {
-                        // int x = Mathf.RoundToInt(hit.collider.transform.position.x);
-                        // int y = Mathf.RoundToInt(hit.collider.transform.position.y);
-
+                        int x = Mathf.RoundToInt(hit.collider.transform.position.x);
+                        int y = Mathf.RoundToInt(hit.collider.transform.position.y);
+                        
                         // int x = boardUnit.X;
                         // int y = boardUnit.Y;
-                        //
-                        // if (_boardTileArr[x, y].index == 0)
-                        // {
-                        //     if (Input.GetMouseButtonDown(0))
-                        //     {
-                        //         PlacePiece(x, y);
-                        //     }
-                        //
-                        //     //curStoneArr.transform.position = new Vector3(x, y, -5f);
-                        // }
+                        if (_boardTileArr[x, y].owner == 0)
+                        {
+                            if (Input.GetMouseButtonDown(0))
+                            {
+                                Debug.Log("뭔가 눌렸습니다. ");
+                                //PlacePiece(x, y);
+                            }
+                            //curStoneArr.transform.position = new Vector3(x, y, -5f);
+                        }
                     }
 
                     if (Input.GetMouseButtonDown(0))
@@ -298,252 +229,5 @@ namespace Component.Board
 
             Debug.Log($"플레이어 {playerIndex + 1} 선택됨");
         }
-
-        // public void ReturnBoardData()
-        // {
-        //     // card
-        //     foreach (Transform child in tileParent)
-        //     {
-        //         ObjectPoolManager.Instance.ReturnBoardCard();
-        //     }
-        //     // piece 
-        //     foreach (Transform child in cardParent)
-        //     {
-        //         ObjectPoolManager.Instance.ReturnPiece(piece);
-        //     }
-        // }
-
-        public void SpawnPieceOnTile(Vector2Int tileIndex, ColorType colorType)
-        {
-            if (_pieceOnBoard.ContainsKey(tileIndex))
-                return;
-            
-            GameObject pieceObj = ObjectPoolManager.Instance.GetPiece().gameObject;
-            
-            if (_pieceFilter.SetPieceTemp(pieceObj, colorType, tileIndex))
-            {
-                _pieceOnBoard[tileIndex] = pieceObj.GetComponent<Piece>();
-            }
-        }
-        void CalTileGroupCenterInPanel(BoardTile[,] tiles, RectTransform panel)
-        {
-            Transform tile_0 = tiles[0, 0].unit.transform;
-            Vector3 tile_0_position = tile_0.position;
-
-            float totalWidth = tiles.Length > 0
-                ? tiles.Length * tiles[0, 0].unit.GetComponent<RectTransform>().rect.width
-                : 0;
-
-            float totalHeight = tiles.Length > 0 ? tiles[0, 0].unit.GetComponent<RectTransform>().rect.height : 0;
-
-            Vector3 groupOffset = new Vector3(totalWidth / 2, totalHeight / 2, 0);
-
-            Vector3 panelCenter = panel.position
-                                  + new Vector3(panel.rect.width / 2, panel.rect.height / 2, 0);
-
-            Vector3 newGroupPosition = panelCenter - groupOffset;
-
-            tile_0.position = newGroupPosition;
-
-        }
-
     }
-
 }
-
-// void EndGame()
-// {
-//     // 게임 종료 처리
-//     GameManager gameManager = FindObjectOfType<GameManager>();
-//     GameManager.ReturnTilesAndCards();
-//
-//     Debug.Log("모든 타일과 카드를 반환했습니다!");
-// }
-    
-// public void ResetObject(GameObject obj)
-// {
-//     obj.transform.position = Vector3.zero; // 위치 초기화
-//     obj.transform.rotation = Quaternion.identity; // 회전 초기화
-//     // 필요에 따라 추가 초기화 작업 (예: 애니메이션, 스프라이트 변경 등)
-// }
-
-
-
-
-
-    // public class CardComparer
-    // {
-    //     public static bool CompareCards(Card handCard, Card boardCard)
-    //     {
-    //         return handCard.GetData().content == boardCard.GetData().content;
-    //     }
-    // }
-    //
-    // public class PieceFilter
-    // {
-    //     public static bool CanPlacePiece(Tile tile, PieceData pieceData)
-    //     {
-    //         if (tile.HasPiece()) return false;  // 이미 놓인 경우 배치 불가
-    //         return true;
-    //     }
-    // }
-    //
-    //
-    // public class Piece : MonoBehaviour
-    // {
-    //     private PieceData pieceData;
-    //
-    //     public void SetData(PieceData data)
-    //     {
-    //         this.pieceData = data;
-    //         GetComponent<SpriteRenderer>().color = (data.type == PlayerType.P1) ? Color.black : Color.white;
-    //     }
-    // }
-    //
-    //
-    // public class Card : MonoBehaviour
-    // {
-    //     private CardData data;
-    //
-    //     public void SetData(CardData data)
-    //     {
-    //         this.data = data;
-    //         GetComponent<SpriteRenderer>().sprite = data.sprite;
-    //     }
-    //
-    //     public CardData GetData() => data;
-    // }
-    //
-    // public class Tile : MonoBehaviour
-    // {
-    //     private Vector2Int index;
-    //     private Card currentCard;
-    //     private Piece currentPiece;
-    //
-    //     public void Init(Vector2Int index)
-    //     {
-    //         this.index = index;
-    //     }
-    //
-    //     public void SetCard(Card card)
-    //     {
-    //         currentCard = card;
-    //         card.transform.SetParent(transform, false);
-    //     }
-    //
-    //     public void PlacePiece(Piece piece)
-    //     {
-    //         if (currentPiece != null) return;
-    //         currentPiece = piece;
-    //         piece.transform.SetParent(transform, false);
-    //     }
-    // }
-    //
-    // public class BoardManager : MonoBehaviour
-    // {
-    //     public GameObject tilePrefab;
-    //     public Transform boardParent;
-    //     private Tile[,] tiles = new Tile[8, 8];
-    //
-    //     void Start()
-    //     {
-    //         CreateBoard();
-    //         SpawnCards();
-    //     }
-    //
-    //     void CreateBoard()
-    //     {
-    //         for (int x = 0; x < 8; x++)
-    //         {
-    //             for (int y = 0; y < 8; y++)
-    //             {
-    //                 GameObject tileObj = Instantiate(tilePrefab, boardParent);
-    //                 Tile tile = tileObj.GetComponent<Tile>();
-    //                 tile.Init(new Vector2Int(x, y));
-    //                 tiles[x, y] = tile;
-    //             }
-    //         }
-    //     }
-    //
-    //     void SpawnCards()
-    //     {
-    //         foreach (Tile tile in tiles)
-    //         {
-    //             Card card = ObjectPool<Card>.Instance.Get();
-    //             card.SetData(CardDeck.Instance.GetRandomCard());
-    //             tile.SetCard(card);
-    //         }
-    //     }
-    // }
-
-
-
-    //
-    // void SpawnBoardCard(Vector2Int pos, CardData cardData)
-    // {
-    //     Card card = ObjectPoolManager.Instance.GetBoardCard();
-    //     card.transform.position = new Vector3(pos.x, pos.y, 0);
-    //     card.Initialize(cardData);
-    // }
-    //
-    //
-    // void DrawCard(CardData cardData)
-    // {
-    //     Card card = ObjectPoolManager.Instance.GetHandCard();
-    //     card.Initialize(cardData);
-    // }
-    //
-    //
-    //
-    // void PlacePiece(Vector2Int pos, PlayerType player)
-    // {
-    //     Piece piece = ObjectPoolManager.Instance.GetPiece();
-    //     piece.transform.position = new Vector3(pos.x, pos.y, 0);
-    //     piece.Initialize(new PieceData(pos, player, true));
-    // }
-// private void PlacePiece(int x, int y)
-    // {
-    //     _boardTileArr[x, y].owner = 1; // _ownerType
-    //     _boardTileArr[x, y].unit.GetComponent<SpriteRenderer>().color = Color.black;
-    // }
-    
-    
-    
-    // private void CreateStone(GameObject stonePrefab, int x, int y)
-    // {
-    //     _isSelected = false;
-    //     
-    //     //Destroy(curStoneArr);
-    //
-    //     if (tileArr[x, y] == 0)
-    //     {
-    //         //curStoneArr = Instantiate(stonePrefab, new Vector3(x, y, -5f), Quaternion.identity);
-    //         tileArr[x, y] = 1;
-    //
-    //         // curStoneArr = Instantiate(stonePrefab, this.transform);
-    //         // curStoneArr.transform.position = new Vector3(x, 0, z);
-    //         // tileArr[x, z] = 1;
-    //     }
-    // }
-    //
-    // private void OnSelectPlayer(int index)
-    // {
-    //     _isSelected = true;
-    //     // _stoneIndex = index;
-    //     // curStoneArr = prevStoneArr[index];
-    //     // curStoneArr = Instantiate(curStoneArr, this.transform);
-    // }
-    //
-    // public void OnChangePlayer(int index)
-    // {
-    //     // curStoneArr = stoneArr[index];
-    // }
-    
-    
-    
-    // private Vector3 CalCardPos(int index)
-    // {
-    //     int row = index / _boardSize.x;
-    //     int column = index % _boardSize.x;
-    //     return new Vector3(row * _boardSize.x, column * _boardSize.y, -3f);
-    // }

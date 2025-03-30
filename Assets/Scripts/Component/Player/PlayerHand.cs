@@ -16,7 +16,7 @@ namespace Component.Player
         [SerializeField] private Transform cardParent;
         private RectTransform _cardRectTransform;
 
-        private CardDeck _cardDeck;
+        private CardFilter _cardFilter;
         private Vector2Int _spacing = new(100, 0);
 
         private readonly HashSet<int> _usedNumbers = new HashSet<int>(); // 중복 방지
@@ -24,22 +24,22 @@ namespace Component.Player
 
         private void Start()
         {
-            DeckInit();
-            DrawInitHand();
+            Initialize();
+            DrawCardPlayerHand();
         }
 
-        void DeckInit()
+        void Initialize()
         {
-            if (_cardDeck != null)
+            if (_cardFilter != null)
             {
                 Debug.Log("Card Deck is already initialized");
                 return;
             }
 
-            _cardDeck = ScriptableObject.CreateInstance<CardDeck>();
+            _cardFilter = ScriptableObject.CreateInstance<CardFilter>();
         }
 
-        void DrawInitHand()
+        void DrawCardPlayerHand()
         {
             for (int i = 0; i < Constants.cardMaxCountOnPlayerHand; i++)
             {
@@ -49,7 +49,7 @@ namespace Component.Player
 
         void DrawNewCard(int index)
         {
-            // random
+            // random value
             int cardValue;
             do
             {
@@ -66,17 +66,20 @@ namespace Component.Player
                 Debug.LogError("Object Pool is empty!");
                 return;
             }
-
+            
+            // transform 
             go.transform.SetParent(cardParent);
             _cardRectTransform = go.GetComponent<RectTransform>();
-
+            
             float spacingX = index * _cardRectTransform.sizeDelta.x + _spacing.x;
             _cardRectTransform.anchoredPosition = new Vector2(spacingX, 0);
-            go.GetComponent<Image>().sprite = _cardDeck.cards[cardValue].sprite;
+            
+            // image sprite
+            go.GetComponent<Image>().sprite = _cardFilter.cards[cardValue].sprite;
+            go.SetActive(true);
 
             // Data manage 
             _activeCards.Add(go);
-            go.SetActive(true);
         }
 
         public void ReplaceCard(int index)
@@ -89,5 +92,7 @@ namespace Component.Player
             // DrawNewCard();
         }
 
+        
+        
     }
 }

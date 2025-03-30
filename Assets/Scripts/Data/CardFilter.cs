@@ -4,22 +4,20 @@ using UnityEngine;
 
 namespace Data
 {
-    [CreateAssetMenu(fileName = "CardDeck", menuName = "User/CardDeck", order = 0)]
-    public class CardDeck : ScriptableObject
+    [CreateAssetMenu(fileName = "CardFilter", menuName = "User/CardFilter", order = 0)]
+    public class CardFilter : ScriptableObject
     {
-        public List<CardData> cards = new List<CardData>();
-
-        #region Hide data
+        public List<CardData> cards = new ();
 
         private void OnEnable()
         {
             if (cards == null || cards.Count == 0)
             {
-                Init();
+                Initialize();
             }
         }
 
-        public void Init()
+        private void Initialize()
         {
             cards.Add(new CardData
             {
@@ -127,7 +125,5 @@ namespace Data
                 sprite = Resources.Load<Sprite>("Sprites/Card_pack/Card_Wild")
             });
         }
-
-        #endregion
     }
 }

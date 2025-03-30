@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Common
+namespace System
 {
     public class Timer : MonoBehaviour
     {

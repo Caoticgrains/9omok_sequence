@@ -9,32 +9,61 @@ namespace Component.Board
 {
     public class BoardUnit : MonoBehaviour
     {
-        private Vector2Int _boardIndex;
-        private Transform _transform;
+        private Vector2Int _index;
+        public Board _board;
+        // board unit
+        private Image _boardUnitImage;
+        private Transform _boardUnitParent;
+        private RectTransform _boardUnitRectTransform;
         
-        private Image _cardImage;
+        // selector
+        private Image _selectorImage;
+        private Transform _selectorParent;
+        private RectTransform _selectorRectTransform;
+        
+        // card
         private CardData _cardData;
+        private Image _cardImage;
+        private Transform _cardParent;
+        private RectTransform _cardRectTransform;
         
-        private Image _pieceImage;
+        // piece
         private PieceData _pieceData;
-
+        private Image _pieceImage;
+        private Transform _pieceParent;
+        private RectTransform _pieceRectTransform;
+        
+        // delegate
         public delegate void OnBoardUnitClicked();
-
         private OnBoardUnitClicked _onBoardUnitClickedDelegate;
         
-        public void Initialize(Vector2Int index, CardData cardData, OnBoardUnitClicked onBoardUnitClicked)
+        // active
+        private bool IsActiveBoardUnit { get; set; }
+        private bool IsActiveSelector { get; set; }
+        private bool IsActivePiece { get; set; }
+        private bool IsActiveCard { get; set; }
+        
+        public void Initialize( Vector2Int index, 
+            GameObject cardObject, CardData cardData, 
+            GameObject pieceObject, PieceData pieceData,
+            OnBoardUnitClicked onBoardUnitClicked)
         {
-            this._boardIndex = index;
+            this._index = index;
             this._cardData = cardData;
+            this._pieceData = pieceData;
             this._onBoardUnitClickedDelegate = onBoardUnitClicked;
-
-            _cardImage = GetComponent<Image>();
+            
+            _cardImage = cardObject.GetComponent<Image>();
             _cardImage.sprite = cardData.sprite;
-
-            _pieceImage = GetComponent<Image>();
-            _pieceImage.sprite = cardData.sprite;
+            
+            _pieceImage = pieceObject.GetComponent<Image>();
+            _pieceImage.sprite = pieceData.sprite;
+            
+            // _selectorImage = go.GetComponent<Image>();
+            // _selectorImage.sprite = cardData.sprite;
+            
         }
-
+        
         private void OnMouseDown()
         {
             // UI component crash 
@@ -44,7 +73,7 @@ namespace Component.Board
             _onBoardUnitClickedDelegate?.Invoke();
 
             // raycast 
-            //_board.RayToBoard();
+            _board.RayToBoard();
         }
 
         public void SetSelectUnitColor(Color color)
@@ -69,3 +98,25 @@ namespace Component.Board
         }
     }
 }
+
+
+
+
+
+// public void Initialize(Vector2Int index, bool isSelected, CardData cardData, PieceData pieceData, OnBoardUnitClicked onBoardUnitClicked)
+// {
+//     this._index = index;
+//     this._cardData = cardData;
+//     this._pieceData = pieceData;
+//     this._onBoardUnitClickedDelegate = onBoardUnitClicked;
+//     
+//     _cardImage = GetComponent<Image>();
+//     _cardImage.sprite = cardData.sprite;
+//
+//     _pieceImage = GetComponent<Image>();
+//     _pieceImage.sprite = cardData.sprite;
+//     
+//     _selectorImage = GetComponent<Image>();
+//     _selectorImage.sprite = cardData.sprite;
+//     
+// }

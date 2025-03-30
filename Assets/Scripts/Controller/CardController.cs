@@ -1,7 +1,7 @@
 ﻿using Data;
 using UnityEngine;
 
-namespace Manager
+namespace Controller
 {
     public class CardController : MonoBehaviour
     {

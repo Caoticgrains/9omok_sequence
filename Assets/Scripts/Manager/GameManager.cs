@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Common;
 using Component.Board;
 using Pattern;
 using UnityEngine;
@@ -7,6 +8,10 @@ using UnityEngine.SceneManagement;
 
 namespace Manager
 {
+    /// <summary>
+    /// 턴오버 턴타임
+    /// 
+    /// </summary>
     public class GameManager : Singleton9<GameManager>
     {
         #region manager-active
@@ -71,6 +76,7 @@ namespace Manager
         
         void Update()
         {
+            
             switch (eGameType)
             {
                 case GameType.Intro:

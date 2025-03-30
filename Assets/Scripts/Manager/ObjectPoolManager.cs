@@ -19,17 +19,29 @@ namespace Manager
         
         private void Awake()
         {
-            if (Instance == null) Instance = this;
-        
-            _boardCardPool = boardCardPrefab.AddComponent<ObjectPool9>();
-            _handCardPool = handCardPrefab.AddComponent<ObjectPool9>();
-            _piecePool = piecePrefab.AddComponent<ObjectPool9>();
-            _bannerPool = bannerPrefab.AddComponent<ObjectPool9>();
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else if (Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
             
-            _boardCardPool.Initialize(boardCardPrefab, 64);
-            _handCardPool.Initialize(handCardPrefab, 7);
-            _piecePool.Initialize(piecePrefab, 64);
-            _bannerPool.Initialize(bannerPrefab, 10);
+            _boardCardPool = CreatePool("BoardCardPool",boardCardPrefab, 64);
+            _handCardPool = CreatePool("HandCardPool",handCardPrefab, 7);
+            _piecePool = CreatePool("PiecePool",piecePrefab, 64);
+            _bannerPool = CreatePool("BannerPool",bannerPrefab, 10);
+        }
+
+        private ObjectPool9 CreatePool(string poolName, GameObject prefab, int size)
+        {
+            GameObject poolObject = new GameObject(poolName);
+            poolObject.transform.SetParent(transform);
+            ObjectPool9 pool = poolObject.AddComponent<ObjectPool9>();
+            pool.Initialize(prefab, size);
+            return pool;
         }
         
         public GameObject GetBoardCard() => _boardCardPool.GetObj();

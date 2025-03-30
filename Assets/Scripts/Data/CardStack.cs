@@ -7,9 +7,9 @@ namespace Data
 {
     public class CardStack : Stack9<CardData>
     {
-        public static CardStack Instance { get; private set; }
-
-        public void Awake()
+        private static CardStack Instance { get; set; }
+        
+        private void Awake()
         {
             if (Instance == null)
                 Instance = this;

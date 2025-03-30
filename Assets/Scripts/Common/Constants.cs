@@ -1,7 +1,7 @@
 ﻿
 namespace Common
 {
-    public class Constants
+    public static class Constants
     {
         public enum ModeType
         {
@@ -19,7 +19,7 @@ namespace Common
         public enum SerialIndex
         {
             LT = 0,
-            RT = 7,
+            RT = 7, 
             LB = 56,
             RB = 63
         }
@@ -30,9 +30,10 @@ namespace Common
             Dragon = 19
         }
 
+        public const int cardMaxCountOnBoard = 64;
         public const int cardMaxCountOnPlayerHand = 7;
-        public const int pieceMaxCountOnPlayerHand = 40;
-        public const int bannerMaxCountOnGround = 10;
+        public const int pieceMaxCountOnPlayerHand = 32;
+        public const int bannerMaxCountOnPanel = 20;
 
     }
 }
