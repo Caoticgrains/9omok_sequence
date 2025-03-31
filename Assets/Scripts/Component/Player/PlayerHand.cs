@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Common;
+using Component.Board;
 using Data;
 using Manager;
 using Pattern;
@@ -15,6 +16,8 @@ namespace Component.Player
     {
         [SerializeField] private GameObject cardPrefab;
         [SerializeField] private Transform cardParent;
+
+        [SerializeField] private Owner owner;
         
         private RectTransform _cardRectTransform;
 
@@ -81,6 +84,8 @@ namespace Component.Player
             go.SetActive(true);
 
             HandCard card = go.GetOrAddComponent<HandCard>();
+            card.content = (Content)cardValue;
+            card.owner = owner;
             
             // Data manage 
             _activeCards.Add(card);

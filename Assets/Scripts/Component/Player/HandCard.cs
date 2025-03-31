@@ -1,10 +1,15 @@
 ﻿using System;
+using Component.Board;
+using Data;
+using Manager;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class HandCard : MonoBehaviour
 {
     private Image _image;
+    public Content content;
+    public Owner owner;
 
     private void Start()
     {
@@ -14,6 +19,6 @@ public class HandCard : MonoBehaviour
 
     private void OnClicked()
     {
-        Debug.Log(gameObject.name + " clicked");
+        GameManager.Instance.SelectHandCard(this);
     }
 }

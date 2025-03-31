@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Common;
 using Component.Board;
+using Data;
 using Pattern;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -31,69 +32,55 @@ namespace Manager
         #endregion
 
         public GameLogic logic = new();
-        
+
+        public Content SelectedContent = Content.Back;
+
+        public enum EPhase
+        {
+            None,
+            HandSelect,
+            BoardSelect,
+            EndTurn,
+        }
+
+        public EPhase currentPhase = EPhase.None;
+
+
         protected override void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
         }
 
-        public enum GameType
-        {
-            Intro,
-            MainMenu,
-            Build,
-            Play,
-            Outro
-        }
-
-        public GameType eGameType = GameType.Intro;
-        
         void Start()
         {
             logic.SetRandomTurn();
-            Debug.Log($"{logic.currentTurn}");
+            currentPhase = EPhase.HandSelect;
         }
 
-        // SceneManager.LoadScene("Main");
-        
-        
-        private void OnApplicationQuit()
+        public void SelectHandCard(HandCard selected)
         {
-            
+            if (currentPhase != EPhase.HandSelect) return;
+            if (logic.currentTurn != selected.owner) return;
+
+            currentPhase = EPhase.BoardSelect;
+            SelectedContent = selected.content;
+            ObjectPoolManager.Instance.ReturnHandCard(selected.gameObject);
         }
 
-        public void AllClear()
+        public void SelectBoardUnit(BoardUnit selected)
         {
+            if (currentPhase != EPhase.HandSelect) return;
+            if (selected.owner != Owner.None) return;
             
+            currentPhase = EPhase.EndTurn;
+            selected.SetSelectPlayer(logic.currentTurn);
+            EndTurn();
         }
- 
-        // var lastRow = _visibleCells.Last();
-        //     if (!IsVisibleIndex(lastRow.index))
-        // {
-        //     var stageCellButtons = lastRow.stageCellButtons;
-        //     foreach (var stageCellButton in stageCellButtons)
-        //     {
-        //         ObjectPool.Instance.ReturnObj(stageCellButton.gameObject);
-        //     }
-        //     _visibleCells.RemoveAt(_visibleCells.Count - 1);
-        // }
-        
-        void Update()
+
+        public void EndTurn()
         {
-            switch (eGameType)
-            {
-                case GameType.Intro:
-                    break;
-                case GameType.MainMenu:
-                    break;
-                case GameType.Build:
-                    break;
-                case GameType.Play:
-                    break;
-                case GameType.Outro:
-                    break;
-                default:
-                    break;
-            }
+            if (currentPhase != EPhase.EndTurn) return;
+            logic.EndTurn();
+            currentPhase = EPhase.HandSelect;
         }
 
         public void OnClickMainMenuStartButton()
@@ -101,16 +88,9 @@ namespace Manager
             Debug.Log("OnClickMainMenuStartButton : Main -> Game");
             SceneManager.LoadScene("Game");
         }
-        
-        public void OnChangeType(GameType Type)
-        {
-            if (eGameType != Type)
-                eGameType = Type;
-        }
-        
+
         void EndGame()
         {
-
         }
     }
 }

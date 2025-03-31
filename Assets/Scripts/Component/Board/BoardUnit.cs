@@ -1,5 +1,6 @@
 ﻿using System;
 using Data;
+using Manager;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -76,12 +77,9 @@ namespace Component.Board
 
         }
         
-        
-        
         public void OnClicked()
         {
-            
-            Debug.Log("OnClicked");
+            GameManager.Instance.SelectBoardUnit(this);
         }
 
         public Vector2Int GetVec2Int()
@@ -94,8 +92,9 @@ namespace Component.Board
             _cardImage.color = color;
         }
 
-        public void SetSelectPlayerTurn(Owner owner)
+        public void SetSelectPlayer(Owner owner)
         {
+            this.owner = owner;
             switch (owner)
             {
                 case Owner.P1:
