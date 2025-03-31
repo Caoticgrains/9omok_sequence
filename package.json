@@ -1,0 +1,29 @@
+{
+  "name": "9omok_sequence",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Caoticgrains/9omok_sequence.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Caoticgrains/9omok_sequence/issues"
+  },
+  "homepage": "https://github.com/Caoticgrains/9omok_sequence#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
+    "mongodb": "^6.15.0",
+    "session-file-store": "^1.5.0",
+    "socket.io": "^4.8.1",
+    "uuid": "^11.1.0"
+  }
+}
