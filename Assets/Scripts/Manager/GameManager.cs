@@ -30,6 +30,8 @@ namespace Manager
 
         #endregion
 
+        public GameLogic logic = new();
+        
         protected override void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             //throw new System.NotImplementedException();
