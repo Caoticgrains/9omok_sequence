@@ -12,7 +12,7 @@ public class CardDeck
         if (init) return;
         init = true;
         deck.Clear();
-        for (int i = 0; i < 16; i++)
+        for (int i = 1; i < 16; i++)
         for (int j = 0; j < 4; j++)
             deck.Add(CardFilter.cards[i]);
         deck.Shuffle();

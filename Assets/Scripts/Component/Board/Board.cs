@@ -132,7 +132,7 @@ namespace Component.Board
                 _owner = Owner.None;
             
             _cards.Clear(); 
-            for (int i = 0; i < 16; i++)
+            for (int i = 1; i < 16; i++)
             for (int j = 0; j < 4; j++)
                 _cards.Add(i);
 
