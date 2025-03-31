@@ -50,6 +50,7 @@ namespace Manager
         void Start()
         {
             logic.SetRandomTurn();
+            Debug.Log($"{logic.currentTurn}");
         }
 
         // SceneManager.LoadScene("Main");

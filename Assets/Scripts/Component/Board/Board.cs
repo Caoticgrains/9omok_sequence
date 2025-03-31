@@ -6,6 +6,7 @@ using Cysharp.Threading.Tasks;
 using Data;
 using Manager;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
@@ -14,19 +15,6 @@ namespace Component.Board
 {
     public enum Owner { None, P1, P2 }
 
-    [Serializable]
-    public class BoardTile
-    {
-        public Owner owner;
-        public BoardUnit unit;
-
-        public BoardTile(Owner owner, BoardUnit unit)
-        {
-            this.owner = owner;
-            this.unit = unit;
-        }
-    }
-
     public class Board : MonoBehaviour
     {
         // Tile 
@@ -34,7 +22,7 @@ namespace Component.Board
         private BoardUnit _unit;
         
         // board tile Array
-        private BoardTile[,] _boardTileArr;
+        private BoardUnit[,] _boardUnits;
 
         // board size 
         private Vector2Int _boardSize = new Vector2Int(8, 8);
@@ -154,7 +142,7 @@ namespace Component.Board
             CardData cardData = GetRandomCardData(position);
             PieceData pieceData = GetRandomPieceData();
             
-            BoardUnit unit = cardObject.AddComponent<BoardUnit>();
+            BoardUnit unit = cardObject.GetOrAddComponent<BoardUnit>();
             
             unit.Initialize(position, cardObject, cardData, pieceObject, pieceData, () =>
             {
@@ -172,7 +160,7 @@ namespace Component.Board
             if(_isSelected == false)
                 _owner = Owner.None;
             
-            _boardTileArr = new BoardTile[_boardSize.x, _boardSize.y];
+            _boardUnits = new BoardUnit[_boardSize.x, _boardSize.y];
 
             for (int i = 0; i < _boardSize.x; i++)
             {
@@ -180,7 +168,7 @@ namespace Component.Board
                 {
                     Vector2Int position = new Vector2Int(i, j);
                     BoardUnit boardUnit = CreateBoardUnit(position);
-                    _boardTileArr[i,j] = new BoardTile(_owner, boardUnit);
+                    _boardUnits[i, j] = boardUnit;
                 }
             }
         }

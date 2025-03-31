@@ -9,6 +9,8 @@ namespace Component.Board
 {
     public class BoardUnit : MonoBehaviour
     {
+        public Owner owner;
+        
         private Vector2Int _index;
         public Board _board;
         // board unit
@@ -44,12 +46,22 @@ namespace Component.Board
         private bool IsActiveSelector { get; set; }
         private bool IsActivePiece { get; set; }
         private bool IsActiveCard { get; set; }
-        
+
+
+        private void Start()
+        {
+            Button button = GetComponent<Button>();
+            button.onClick.AddListener(OnClicked);
+            
+        }
+
+
         public void Initialize( Vector2Int index, 
             GameObject cardObject, CardData cardData, 
             GameObject pieceObject, PieceData pieceData,
             OnBoardUnitClicked onBoardUnitClicked)
         {
+            this.owner = Owner.None;
             this._index = index;
             this._cardData = cardData;
             this._pieceData = pieceData;
@@ -64,13 +76,12 @@ namespace Component.Board
 
         }
         
-        private void OnMouseDown()
+        
+        
+        public void OnClicked()
         {
-            // UI component crash 
-            if (EventSystem.current.IsPointerOverGameObject()) return;
-
-            // call back 
-            _onBoardUnitClickedDelegate?.Invoke();
+            
+            Debug.Log("OnClicked");
         }
 
         public Vector2Int GetVec2Int()
@@ -88,27 +99,13 @@ namespace Component.Board
             switch (owner)
             {
                 case Owner.P1:
-                    // TODO: sprite가 변하는 상황
                     break;
                 case Owner.P2:
-                    // TODO: sprite가 변하는 상황
                     break;
                 case Owner.None:
-                    // TODO: sprite가 변하는 상황
                     break;
             }
         }
         
-        
-        public void OnSelect()
-        {
-            _cardImage.color *= 0.5f;
-    
-        }
-
-        public void OnClicked()
-        {
-            Debug.Log($"{gameObject.name}: clicked");
-        }
     }
 }

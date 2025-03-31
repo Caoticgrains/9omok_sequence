@@ -4,6 +4,7 @@ using Common;
 using Data;
 using Manager;
 using Pattern;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -21,7 +22,7 @@ namespace Component.Player
         private Vector2Int _spacing = new(100, 0);
 
         private readonly HashSet<int> _usedNumbers = new HashSet<int>(); // 중복 방지
-        private readonly List<GameObject> _activeCards = new();
+        private readonly List<HandCard> _activeCards = new();
 
         private void Start()
         {
@@ -79,21 +80,11 @@ namespace Component.Player
             go.GetComponent<Image>().sprite = _cardFilter.cards[cardValue].sprite;
             go.SetActive(true);
 
+            HandCard card = go.GetOrAddComponent<HandCard>();
+            
             // Data manage 
-            _activeCards.Add(go);
+            _activeCards.Add(card);
         }
-
-        public void ReplaceCard(int index)
-        {
-            if (index < 0 || index >= _activeCards.Count) return;
-
-            GameObject go = _activeCards[index];
-            ObjectPoolManager.Instance.ReturnHandCard(go);
-            _activeCards.RemoveAt(index);
-            // DrawNewCard();
-        }
-
-        
         
     }
 }

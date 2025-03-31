@@ -22,7 +22,7 @@ public class GameLogic
         else if (currentTurn == Owner.P2) currentTurn = Owner.P1;
     }
 
-    public bool CheckVictory(BoardTile[,] unitArray)
+    public bool CheckVictory(BoardUnit[,] unitArray)
     {
         int tileLength = 8;
 

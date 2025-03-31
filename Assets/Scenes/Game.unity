@@ -2227,7 +2227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boardCardPrefab: {fileID: 4047564481438389072, guid: f61cf4778f9df8f43ab8f5dd2fa7db71,
     type: 3}
-  handCardPrefab: {fileID: 4047564481438389072, guid: f61cf4778f9df8f43ab8f5dd2fa7db71,
+  handCardPrefab: {fileID: 4047564481438389072, guid: cd1584c3d9b5a8e41842b0f9bfae8a33,
     type: 3}
   piecePrefab: {fileID: 6680026032342346673, guid: b6c62bdb869097f41ae3ccc7cbe4cafa,
     type: 3}

@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 1521784820923188196}
   - component: {fileID: 4452827131852070741}
   - component: {fileID: 6197676330349838990}
-  - component: {fileID: 8517636486591790772}
-  - component: {fileID: 3146457333449028984}
+  - component: {fileID: 5274045322516097289}
+  - component: {fileID: -6812989157231413849}
   m_Layer: 5
-  m_Name: Card
+  m_Name: HandCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8517636486591790772
+--- !u!114 &5274045322516097289
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &3146457333449028984
+--- !u!114 &-6812989157231413849
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,8 +130,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 4047564481438389072}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1bb303d24e0498b98e89b9b64a09030, type: 3}
+  m_Script: {fileID: 11500000, guid: cf856ff4ec09493fb538f399bd8cdbd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: 0
-  _board: {fileID: 0}
