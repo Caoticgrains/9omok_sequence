@@ -2018,6 +2018,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1158483668}
   - component: {fileID: 1158483669}
+  - component: {fileID: 1158483670}
   m_Layer: 0
   m_Name: Cursor
   m_TagString: Untagged
@@ -2055,6 +2056,18 @@ MonoBehaviour:
   texture: {fileID: 2800000, guid: 20e0222647258e14497a404a4a4d3872, type: 3}
   hotspot: {x: 0, y: 0}
   mode: 0
+--- !u!114 &1158483670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158483667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 895785ea02674a7d92816b023b4004bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1182583470
 GameObject:
   m_ObjectHideFlags: 0

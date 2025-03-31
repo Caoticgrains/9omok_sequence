@@ -17,9 +17,11 @@ namespace Component.Board
         private RectTransform _boardUnitRectTransform;
         
         // selector
+        private GameObject _selectObject;
         private Image _selectorImage;
         private Transform _selectorParent;
         private RectTransform _selectorRectTransform;
+        private Sprite _selectorSprite;
         
         // card
         private CardData _cardData;
@@ -61,7 +63,7 @@ namespace Component.Board
             
             // _selectorImage = go.GetComponent<Image>();
             // _selectorImage.sprite = cardData.sprite;
-            
+            // _selectorSprite = Resources.Load<Sprite>("Sprites/Pointer/position-selector");
         }
         
         private void OnMouseDown()
@@ -71,11 +73,13 @@ namespace Component.Board
 
             // call back 
             _onBoardUnitClickedDelegate?.Invoke();
-
-            // raycast 
-            _board.RayToBoard();
         }
 
+        public Vector2Int GetVec2Int()
+        {
+            return _index;
+        }
+        
         public void SetSelectUnitColor(Color color)
         {
             _cardImage.color = color;
@@ -95,6 +99,17 @@ namespace Component.Board
                     // TODO: sprite가 변하는 상황
                     break;
             }
+        }
+
+        // private Image _selectorImage;
+        // private Transform _selectorParent;
+        // private RectTransform _selectorRectTransform;
+        
+        public void OnSelect()
+        {
+
+            _selectorImage = _selectObject.GetComponent<Image>();
+            _selectorImage.sprite = Resources.Load<Sprite>("Sprites/Pointer/position-selector");
         }
     }
 }

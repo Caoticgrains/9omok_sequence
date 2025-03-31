@@ -14,6 +14,7 @@ namespace Component.Player
     {
         [SerializeField] private GameObject cardPrefab;
         [SerializeField] private Transform cardParent;
+        
         private RectTransform _cardRectTransform;
 
         private CardFilter _cardFilter;

@@ -64,11 +64,15 @@ namespace Component.Board
         // delegate
         public delegate void OnBoardClicked(int row, int column);
         public OnBoardClicked OnBoardClickedDelegate;
+        private Camera _camera;
+        private Camera _camera1;
 
         void Start()
         {
-            PlayerSelected();
+            _camera1 = Camera.main;
+            _camera = Camera.main;
             
+            PlayerSelected();
             CreateBoard();
 
             // 비동기 작업 실행 Update()기능 
@@ -141,11 +145,15 @@ namespace Component.Board
             pieceObject.name = $"Piece_{position.x}_{position.y}";
             pieceObject.transform.position = CalculateBoardPosition(position, boardPieceParent);
             pieceObject.transform.SetParent(boardPieceParent);
+            pieceObject.SetActive(false);
+            
+            
             
             CardData cardData = GetRandomCardData(position);
             PieceData pieceData = GetRandomPieceData();
             
             BoardUnit unit = cardObject.AddComponent<BoardUnit>();
+            
             unit.Initialize(position, cardObject, cardData, pieceObject, pieceData, () =>
             {
                 Debug.Log("onBoardUnitClicked");
@@ -177,39 +185,25 @@ namespace Component.Board
         
         public void RayToBoard()
         {
-            if (!_isSelected) return;
+            //if (!_isSelected) return;
 
-            if (Camera.main != null)
+            if (_camera1 != null)
             {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                Vector2 mousePosition = _camera.ScreenToWorldPoint(Input.mousePosition);
+            
+                RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
 
-                if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
+                if (hit.collider != null)
                 {
-                    BoardUnit boardUnit = hit.transform.GetComponent<BoardUnit>();
+                    BoardUnit boardUnit = hit.collider.GetComponent<BoardUnit>();
 
                     if (boardUnit != null)
                     {
                         int x = Mathf.RoundToInt(hit.collider.transform.position.x);
                         int y = Mathf.RoundToInt(hit.collider.transform.position.y);
-                        
-                        // int x = boardUnit.X;
-                        // int y = boardUnit.Y;
-                        if (_boardTileArr[x, y].owner == 0)
-                        {
-                            if (Input.GetMouseButtonDown(0))
-                            {
-                                Debug.Log("뭔가 눌렸습니다. ");
-                                //PlacePiece(x, y);
-                            }
-                            //curStoneArr.transform.position = new Vector3(x, y, -5f);
-                        }
-                    }
 
-                    if (Input.GetMouseButtonDown(0))
-                    {
-                        //CreateStone(stoneArr[_stoneIndex], x, y);
+                        Debug.Log($"Hit UI Component at position: ({x}, {y})");
                     }
-
                 }
             }
         }

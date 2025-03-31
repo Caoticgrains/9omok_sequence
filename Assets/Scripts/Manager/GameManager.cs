@@ -52,7 +52,8 @@ namespace Manager
         }
 
         // SceneManager.LoadScene("Main");
-
+        
+        
         private void OnApplicationQuit()
         {
             
@@ -86,7 +87,7 @@ namespace Manager
                     // 
                     break;
                 case GameType.Build:
-                    // Board.RayToBoard();
+                    Board.RayToBoard();
                     break;
                 case GameType.Play:
                     // 
@@ -99,6 +100,12 @@ namespace Manager
             }
         }
 
+        public void OnClickMainMenuStartButton()
+        {
+            Debug.Log("OnClickMainMenuStartButton : Main -> Game");
+            SceneManager.LoadScene("Game");
+        }
+        
         public void OnChangeType(GameType Type)
         {
             if (eGameType != Type)
