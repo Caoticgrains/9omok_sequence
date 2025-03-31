@@ -74,6 +74,7 @@ namespace Component.Player
         {
             ObjectPoolManager.Instance.ReturnHandCard(card.gameObject);
             _cards.Remove(card);
+            Rearrange();
         }
     
         public void Rearrange()

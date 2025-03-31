@@ -2149,6 +2149,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectedContent: 0
+  p1Hand: {fileID: 537229371}
+  p2Hand: {fileID: 1784685928}
   currentPhase: 0
 --- !u!1 &1204233803
 GameObject:
