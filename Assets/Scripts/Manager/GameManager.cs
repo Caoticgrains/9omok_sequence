@@ -58,22 +58,29 @@ namespace Manager
 
         public void SelectHandCard(HandCard selected)
         {
+            Debug.Log(selected.content);
             if (currentPhase != EPhase.HandSelect) return;
+            Debug.Log(selected.content);
             if (logic.currentTurn != selected.owner) return;
-
+            Debug.Log(selected.content);
+            
+            
             currentPhase = EPhase.BoardSelect;
             SelectedContent = selected.content;
             ObjectPoolManager.Instance.ReturnHandCard(selected.gameObject);
+            
         }
 
         public void SelectBoardUnit(BoardUnit selected)
         {
-            if (currentPhase != EPhase.HandSelect) return;
+            if (currentPhase != EPhase.BoardSelect) return;
             if (selected.owner != Owner.None) return;
             
             currentPhase = EPhase.EndTurn;
             selected.SetSelectPlayer(logic.currentTurn);
             EndTurn();
+            
+            Debug.Log("타일 선택 완료");
         }
 
         public void EndTurn()

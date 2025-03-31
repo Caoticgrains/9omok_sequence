@@ -114,13 +114,6 @@ namespace Component.Board
 
             return _cardFilter.cards[randomValue];
         }
-
-        private PieceData GetRandomPieceData()
-        {
-            _pieceFilter = ScriptableObject.CreateInstance<PieceFilter>();
-            int pieceValue = UnityEngine.Random.Range(0, 2);
-            return _pieceFilter.pieces[pieceValue];
-        }
         
         public BoardUnit CreateBoardUnit(Vector2Int position)
         {
@@ -140,11 +133,10 @@ namespace Component.Board
             }
             
             CardData cardData = GetRandomCardData(position);
-            PieceData pieceData = GetRandomPieceData();
             
             BoardUnit unit = cardObject.GetOrAddComponent<BoardUnit>();
             
-            unit.Initialize(position, cardObject, cardData, pieceObject, pieceData, () =>
+            unit.Initialize(position, cardObject, cardData, pieceObject, () =>
             {
                 Debug.Log("onBoardUnitClicked");
             });

@@ -670,6 +670,7 @@ MonoBehaviour:
   cardPrefab: {fileID: 4047564481438389072, guid: f61cf4778f9df8f43ab8f5dd2fa7db71,
     type: 3}
   cardParent: {fileID: 537229370}
+  owner: 1
 --- !u!1 &559917402
 GameObject:
   m_ObjectHideFlags: 0
@@ -2147,7 +2148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e80df06b9cc75ba478dcd0516ca145e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eGameType: 2
+  SelectedContent: 0
+  currentPhase: 0
 --- !u!1 &1204233803
 GameObject:
   m_ObjectHideFlags: 0
@@ -2773,6 +2775,7 @@ MonoBehaviour:
   cardPrefab: {fileID: 4047564481438389072, guid: f61cf4778f9df8f43ab8f5dd2fa7db71,
     type: 3}
   cardParent: {fileID: 1784685927}
+  owner: 2
 --- !u!1 &2002199644
 GameObject:
   m_ObjectHideFlags: 0

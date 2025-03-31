@@ -12,6 +12,8 @@ namespace Component.Board
     {
         public Owner owner;
         
+
+        
         private Vector2Int _index;
         public Board _board;
         // board unit
@@ -33,6 +35,7 @@ namespace Component.Board
         private RectTransform _cardRectTransform;
         
         // piece
+        private GameObject _pieceGameObject;
         private PieceData _pieceData;
         private Image _pieceImage;
         private Transform _pieceParent;
@@ -59,22 +62,19 @@ namespace Component.Board
 
         public void Initialize( Vector2Int index, 
             GameObject cardObject, CardData cardData, 
-            GameObject pieceObject, PieceData pieceData,
+            GameObject pieceObject,
             OnBoardUnitClicked onBoardUnitClicked)
         {
             this.owner = Owner.None;
             this._index = index;
             this._cardData = cardData;
-            this._pieceData = pieceData;
             this._onBoardUnitClickedDelegate = onBoardUnitClicked;
             
             _cardImage = cardObject.GetComponent<Image>();
             _cardImage.sprite = cardData.sprite;
             
             _pieceImage = pieceObject.GetComponent<Image>();
-            _pieceImage.sprite = pieceData.sprite;
-            
-
+            _pieceGameObject = pieceObject;
         }
         
         public void OnClicked()
@@ -95,16 +95,20 @@ namespace Component.Board
         public void SetSelectPlayer(Owner owner)
         {
             this.owner = owner;
+            
             switch (owner)
             {
                 case Owner.P1:
+                    _pieceImage.sprite = Resources.Load<Sprite>("Sprites/Gem/Blue_gem");
                     break;
                 case Owner.P2:
+                    _pieceImage.sprite = Resources.Load<Sprite>("Sprites/Gem/Pink_gem");
                     break;
                 case Owner.None:
                     break;
             }
+            
+            _pieceGameObject.SetActive(true);
         }
-        
     }
 }
