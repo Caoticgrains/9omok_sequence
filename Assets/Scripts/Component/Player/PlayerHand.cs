@@ -18,14 +18,10 @@ namespace Component.Player
         [SerializeField] private Transform cardParent;
 
         [SerializeField] private Owner owner;
-        
+
         private RectTransform _cardRectTransform;
 
-        private CardFilter _cardFilter;
         private Vector2Int _spacing = new(100, 0);
-
-        private readonly HashSet<int> _usedNumbers = new HashSet<int>(); // 중복 방지
-        private readonly List<HandCard> _activeCards = new();
 
         private void Start()
         {
@@ -35,13 +31,6 @@ namespace Component.Player
 
         void Initialize()
         {
-            if (_cardFilter != null)
-            {
-                Debug.Log("Card Deck is already initialized");
-                return;
-            }
-
-            _cardFilter = ScriptableObject.CreateInstance<CardFilter>();
         }
 
         void DrawCardPlayerHand()
@@ -54,15 +43,6 @@ namespace Component.Player
 
         void DrawNewCard(int index)
         {
-            // random value
-            int cardValue;
-            do
-            {
-                cardValue = Random.Range(1, 16);
-            } while (_usedNumbers.Contains(cardValue));
-
-            _usedNumbers.Add(cardValue);
-
             // object & component
             GameObject go = ObjectPoolManager.Instance.GetHandCard();
 
@@ -71,25 +51,23 @@ namespace Component.Player
                 Debug.LogError("Object Pool is empty!");
                 return;
             }
-            
+
             // transform 
             go.transform.SetParent(cardParent);
             _cardRectTransform = go.GetComponent<RectTransform>();
-            
+
             float spacingX = index * _cardRectTransform.sizeDelta.x + _spacing.x;
             _cardRectTransform.anchoredPosition = new Vector2(spacingX, 0);
-            
+
+            var cardData = GameManager.Instance.cardDeck.Draw();
+
             // image sprite
-            go.GetComponent<Image>().sprite = _cardFilter.cards[cardValue].sprite;
+            go.GetComponent<Image>().sprite = cardData.sprite;
             go.SetActive(true);
 
             HandCard card = go.GetOrAddComponent<HandCard>();
-            card.content = (Content)cardValue;
+            card.content = cardData.content;
             card.owner = owner;
-            
-            // Data manage 
-            _activeCards.Add(card);
         }
-        
     }
 }

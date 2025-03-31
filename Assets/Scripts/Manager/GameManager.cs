@@ -32,6 +32,7 @@ namespace Manager
         #endregion
 
         public GameLogic logic = new();
+        public CardDeck cardDeck = new();
 
         public Content SelectedContent = Content.Back;
 
@@ -41,6 +42,7 @@ namespace Manager
             HandSelect,
             BoardSelect,
             EndTurn,
+            EndGame,
         }
 
         public EPhase currentPhase = EPhase.None;
@@ -58,12 +60,8 @@ namespace Manager
 
         public void SelectHandCard(HandCard selected)
         {
-            Debug.Log(selected.content);
             if (currentPhase != EPhase.HandSelect) return;
-            Debug.Log(selected.content);
             if (logic.currentTurn != selected.owner) return;
-            Debug.Log(selected.content);
-            
             
             currentPhase = EPhase.BoardSelect;
             SelectedContent = selected.content;
@@ -74,6 +72,7 @@ namespace Manager
         public void SelectBoardUnit(BoardUnit selected)
         {
             if (currentPhase != EPhase.BoardSelect) return;
+            if (SelectedContent != selected.cardData.content) return;
             if (selected.owner != Owner.None) return;
             
             currentPhase = EPhase.EndTurn;
@@ -86,6 +85,12 @@ namespace Manager
         public void EndTurn()
         {
             if (currentPhase != EPhase.EndTurn) return;
+
+            if (logic.CheckVictory(Board.boardUnits))
+            {
+                EndGame();
+                return;
+            }
             logic.EndTurn();
             currentPhase = EPhase.HandSelect;
         }
@@ -98,6 +103,8 @@ namespace Manager
 
         void EndGame()
         {
+            currentPhase = EPhase.EndGame;
+            Debug.Log($"게임 종료! 승자는 {currentPhase}");
         }
     }
 }

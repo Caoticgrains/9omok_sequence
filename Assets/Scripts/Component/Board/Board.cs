@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Component.Board;
 using Cysharp.Threading.Tasks;
 using Data;
@@ -13,16 +14,21 @@ using UnityEngine.UI;
 
 namespace Component.Board
 {
-    public enum Owner { None, P1, P2 }
+    public enum Owner
+    {
+        None,
+        P1,
+        P2
+    }
 
     public class Board : MonoBehaviour
     {
         // Tile 
         private Owner _owner;
         private BoardUnit _unit;
-        
+
         // board tile Array
-        private BoardUnit[,] _boardUnits;
+        public BoardUnit[,] boardUnits;
 
         // board size 
         private Vector2Int _boardSize = new Vector2Int(8, 8);
@@ -39,50 +45,25 @@ namespace Component.Board
         private bool _isSelected;
         private bool _isPlaced;
 
-        // card prefab setting
-        private CardFilter _cardFilter;
-
         // piece prefab setting;
         private PieceFilter _pieceFilter;
-        
+
         // data
         private Dictionary<Vector2Int, GameObject> _cardOnBoard = new();
         private Dictionary<Vector2Int, GameObject> _pieceOnBoard = new();
 
-        // delegate
-        public delegate void OnBoardClicked(int row, int column);
-        public OnBoardClicked OnBoardClickedDelegate;
-        private Camera _camera;
-        private Camera _camera1;
+        private List<int> _cards = new();
 
         void Start()
         {
-            _camera1 = Camera.main;
-            _camera = Camera.main;
-            
             PlayerSelected();
             CreateBoard();
-
-            // 비동기 작업 실행 Update()기능 
-            //RunAsyncUpdate().Forget();
         }
 
         private void OnDestroy()
         {
             _isTrigger = false;
         }
-
-        // private async UniTask RunAsyncUpdate()
-        // {
-        //     while (_isTrigger)
-        //     {
-        //         // 프레임당 로직처리 
-        //         transform.Translate(Vector3.right * Time.deltaTime);
-        //
-        //         // 다음 프레임까지 대기
-        //         await UniTask.Yield(PlayerLoopTiming.Update);
-        //     }
-        // }
 
         public void PlayerSelected()
         {
@@ -101,27 +82,28 @@ namespace Component.Board
                 0
             );
         }
-        
+
         private CardData GetRandomCardData(Vector2Int position)
         {
-            _cardFilter = ScriptableObject.CreateInstance<CardFilter>();
-            int randomValue = position is { x: 0, y: 0 } ||
-                              position is { x: 0, y: 7 } ||
-                              position is { x: 7, y: 0 } ||
-                              position is { x: 7, y: 7 }
-                ? UnityEngine.Random.Range(20, 21)
-                : UnityEngine.Random.Range(1, 16);
-
-            return _cardFilter.cards[randomValue];
+            if (position is { x: 0, y: 0 } ||
+                position is { x: 0, y: 7 } ||
+                position is { x: 7, y: 0 } ||
+                position is { x: 7, y: 7 })
+                return CardFilter.cards[UnityEngine.Random.Range(20, 21)];
+            
+            int randomIndex = UnityEngine.Random.Range(0, _cards.Count);
+            int randomValue = _cards[randomIndex];
+            _cards.RemoveAt(randomIndex);
+            return CardFilter.cards[randomValue];
         }
-        
+
         public BoardUnit CreateBoardUnit(Vector2Int position)
         {
             GameObject cardObject = ObjectPoolManager.Instance.GetBoardCard();
             cardObject.name = $"Card_{position.x}_{position.y}";
             cardObject.transform.position = CalculateBoardPosition(position, boardCardParent);
             cardObject.transform.SetParent(boardCardParent);
-            
+
             GameObject pieceObject = ObjectPoolManager.Instance.GetPiece();
             pieceObject.name = $"Piece_{position.x}_{position.y}";
             pieceObject.transform.position = CalculateBoardPosition(position, boardPieceParent);
@@ -131,28 +113,30 @@ namespace Component.Board
             {
                 pieceObject.SetActive(false);
             }
-            
+
             CardData cardData = GetRandomCardData(position);
-            
+
             BoardUnit unit = cardObject.GetOrAddComponent<BoardUnit>();
-            
-            unit.Initialize(position, cardObject, cardData, pieceObject, () =>
-            {
-                Debug.Log("onBoardUnitClicked");
-            });
-            
+
+            unit.Initialize(position, cardObject, cardData, pieceObject, () => { Debug.Log("onBoardUnitClicked"); });
+
             _cardOnBoard[position] = cardObject;
             _pieceOnBoard[position] = pieceObject;
 
             return unit;
         }
-        
+
         public void CreateBoard()
         {
-            if(_isSelected == false)
+            if (_isSelected == false)
                 _owner = Owner.None;
             
-            _boardUnits = new BoardUnit[_boardSize.x, _boardSize.y];
+            _cards.Clear(); 
+            for (int i = 0; i < 16; i++)
+            for (int j = 0; j < 4; j++)
+                _cards.Add(i);
+
+            boardUnits = new BoardUnit[_boardSize.x, _boardSize.y];
 
             for (int i = 0; i < _boardSize.x; i++)
             {
@@ -160,7 +144,7 @@ namespace Component.Board
                 {
                     Vector2Int position = new Vector2Int(i, j);
                     BoardUnit boardUnit = CreateBoardUnit(position);
-                    _boardUnits[i, j] = boardUnit;
+                    boardUnits[i, j] = boardUnit;
                 }
             }
         }

@@ -1,8 +1,5 @@
 ﻿using System.Collections.Generic;
-using Component.Board;
-using Data;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Data
 {

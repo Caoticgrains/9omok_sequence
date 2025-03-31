@@ -29,7 +29,7 @@ namespace Component.Board
         private Sprite _selectorSprite;
         
         // card
-        private CardData _cardData;
+        public CardData cardData;
         private Image _cardImage;
         private Transform _cardParent;
         private RectTransform _cardRectTransform;
@@ -67,7 +67,7 @@ namespace Component.Board
         {
             this.owner = Owner.None;
             this._index = index;
-            this._cardData = cardData;
+            this.cardData = cardData;
             this._onBoardUnitClickedDelegate = onBoardUnitClicked;
             
             _cardImage = cardObject.GetComponent<Image>();
