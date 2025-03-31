@@ -34,7 +34,6 @@ namespace Manager
         
         protected override void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            //throw new System.NotImplementedException();
         }
 
         public enum GameType
