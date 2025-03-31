@@ -114,12 +114,6 @@ namespace Manager
             currentPhase = EPhase.HandSelect;
         }
 
-        public void OnClickMainMenuStartButton()
-        {
-            Debug.Log("OnClickMainMenuStartButton : Main -> Game");
-            SceneManager.LoadScene("Game");
-        }
-
         void EndGame()
         {
             currentPhase = EPhase.EndGame;
