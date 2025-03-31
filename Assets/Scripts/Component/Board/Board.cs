@@ -122,7 +122,7 @@ namespace Component.Board
                               position is { x: 7, y: 0 } ||
                               position is { x: 7, y: 7 }
                 ? UnityEngine.Random.Range(20, 21)
-                : UnityEngine.Random.Range(1, 20);
+                : UnityEngine.Random.Range(1, 16);
 
             return _cardFilter.cards[randomValue];
         }
@@ -145,9 +145,11 @@ namespace Component.Board
             pieceObject.name = $"Piece_{position.x}_{position.y}";
             pieceObject.transform.position = CalculateBoardPosition(position, boardPieceParent);
             pieceObject.transform.SetParent(boardPieceParent);
-            pieceObject.SetActive(false);
-            
-            
+
+            if (_owner == Owner.None)
+            {
+                pieceObject.SetActive(false);
+            }
             
             CardData cardData = GetRandomCardData(position);
             PieceData pieceData = GetRandomPieceData();
@@ -179,31 +181,6 @@ namespace Component.Board
                     Vector2Int position = new Vector2Int(i, j);
                     BoardUnit boardUnit = CreateBoardUnit(position);
                     _boardTileArr[i,j] = new BoardTile(_owner, boardUnit);
-                }
-            }
-        }
-        
-        public void RayToBoard()
-        {
-            //if (!_isSelected) return;
-
-            if (_camera1 != null)
-            {
-                Vector2 mousePosition = _camera.ScreenToWorldPoint(Input.mousePosition);
-            
-                RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
-
-                if (hit.collider != null)
-                {
-                    BoardUnit boardUnit = hit.collider.GetComponent<BoardUnit>();
-
-                    if (boardUnit != null)
-                    {
-                        int x = Mathf.RoundToInt(hit.collider.transform.position.x);
-                        int y = Mathf.RoundToInt(hit.collider.transform.position.y);
-
-                        Debug.Log($"Hit UI Component at position: ({x}, {y})");
-                    }
                 }
             }
         }

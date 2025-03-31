@@ -77,23 +77,17 @@ namespace Manager
         
         void Update()
         {
-            
             switch (eGameType)
             {
                 case GameType.Intro:
-                    // 
                     break;
                 case GameType.MainMenu:
-                    // 
                     break;
                 case GameType.Build:
-                    Board.RayToBoard();
                     break;
                 case GameType.Play:
-                    // 
                     break;
                 case GameType.Outro:
-
                     break;
                 default:
                     break;

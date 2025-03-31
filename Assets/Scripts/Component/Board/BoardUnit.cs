@@ -61,9 +61,7 @@ namespace Component.Board
             _pieceImage = pieceObject.GetComponent<Image>();
             _pieceImage.sprite = pieceData.sprite;
             
-            // _selectorImage = go.GetComponent<Image>();
-            // _selectorImage.sprite = cardData.sprite;
-            // _selectorSprite = Resources.Load<Sprite>("Sprites/Pointer/position-selector");
+
         }
         
         private void OnMouseDown()
@@ -100,38 +98,17 @@ namespace Component.Board
                     break;
             }
         }
-
-        // private Image _selectorImage;
-        // private Transform _selectorParent;
-        // private RectTransform _selectorRectTransform;
+        
         
         public void OnSelect()
         {
+            _cardImage.color *= 0.5f;
+    
+        }
 
-            _selectorImage = _selectObject.GetComponent<Image>();
-            _selectorImage.sprite = Resources.Load<Sprite>("Sprites/Pointer/position-selector");
+        public void OnClicked()
+        {
+            Debug.Log($"{gameObject.name}: clicked");
         }
     }
 }
-
-
-
-
-
-// public void Initialize(Vector2Int index, bool isSelected, CardData cardData, PieceData pieceData, OnBoardUnitClicked onBoardUnitClicked)
-// {
-//     this._index = index;
-//     this._cardData = cardData;
-//     this._pieceData = pieceData;
-//     this._onBoardUnitClickedDelegate = onBoardUnitClicked;
-//     
-//     _cardImage = GetComponent<Image>();
-//     _cardImage.sprite = cardData.sprite;
-//
-//     _pieceImage = GetComponent<Image>();
-//     _pieceImage.sprite = cardData.sprite;
-//     
-//     _selectorImage = GetComponent<Image>();
-//     _selectorImage.sprite = cardData.sprite;
-//     
-// }

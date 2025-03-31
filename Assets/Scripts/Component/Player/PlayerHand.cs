@@ -54,7 +54,7 @@ namespace Component.Player
             int cardValue;
             do
             {
-                cardValue = Random.Range(1, 20);
+                cardValue = Random.Range(1, 16);
             } while (_usedNumbers.Contains(cardValue));
 
             _usedNumbers.Add(cardValue);

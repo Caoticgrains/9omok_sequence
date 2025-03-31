@@ -11,15 +11,15 @@ namespace Manager
         [SerializeField] private GameObject handCardPrefab; 
         [SerializeField] private GameObject piecePrefab; 
         [SerializeField] private GameObject bannerPrefab;
-        [SerializeField] private GameObject selectBoardCardPrefab;
-        [SerializeField] private GameObject selectHandCardPrefab;
+        // [SerializeField] private GameObject selectBoardCardPrefab;
+        // [SerializeField] private GameObject selectHandCardPrefab;
 
         private ObjectPool9 _boardCardPool;
         private ObjectPool9 _handCardPool;
         private ObjectPool9 _piecePool;
         private ObjectPool9 _bannerPool;
-        private ObjectPool9 _selectBoardPool;
-        private ObjectPool9 _selectHandPool;
+        // private ObjectPool9 _selectBoardPool;
+        // private ObjectPool9 _selectHandPool;
         
         private void Awake()
         {
@@ -37,8 +37,8 @@ namespace Manager
             _handCardPool = CreatePool("HandCardPool",handCardPrefab, 7);
             _piecePool = CreatePool("PiecePool",piecePrefab, 64);
             _bannerPool = CreatePool("BannerPool",bannerPrefab, 10);
-            _selectBoardPool = CreatePool("SelectPool",selectBoardCardPrefab, 64);
-            _selectHandPool = CreatePool("SelectPool",selectHandCardPrefab, 7);
+            // _selectBoardPool = CreatePool("selectBoardPool",selectBoardCardPrefab, 64);
+            // _selectHandPool = CreatePool("selectHandPool",selectHandCardPrefab, 7);
 
         }
 
@@ -55,16 +55,16 @@ namespace Manager
         public GameObject GetHandCard() => _handCardPool.GetObj();
         public GameObject GetPiece() => _piecePool.GetObj();
         public GameObject GetBanner() => _bannerPool.GetObj();
-        public GameObject GetSelectBoardCard() => _selectBoardPool.GetObj();
-        public GameObject GetSelectHandCard() => _selectHandPool.GetObj();
+        // public GameObject GetSelectBoardCard() => _selectBoardPool.GetObj();
+        // public GameObject GetSelectHandCard() => _selectHandPool.GetObj();
         
 
         public void ReturnBoardCard(GameObject card) => _boardCardPool.ReturnObj(card);
         public void ReturnHandCard(GameObject card) => _handCardPool.ReturnObj(card);
         public void ReturnPiece(GameObject piece) => _piecePool.ReturnObj(piece);
         public void ReturnBanner(GameObject banner) => _bannerPool.ReturnObj(banner);
-        public void ReturnSelectBoardCard(GameObject selector) => _selectBoardPool.ReturnObj(selector);
-        public void ReturnSelectHandCard(GameObject selector) => _selectHandPool.ReturnObj(selector);
+        // public void ReturnSelectBoardCard(GameObject selector) => _selectBoardPool.ReturnObj(selector);
+        // public void ReturnSelectHandCard(GameObject selector) => _selectHandPool.ReturnObj(selector);
         
     }
 }
