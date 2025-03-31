@@ -50,7 +50,7 @@ namespace Manager
         
         void Start()
         {
-            //Board.CreateBoard();
+            logic.SetRandomTurn();
         }
 
         // SceneManager.LoadScene("Main");
