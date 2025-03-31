@@ -18,8 +18,9 @@ namespace Component.Player
         [SerializeField] private Transform cardParent;
 
         [SerializeField] private Owner owner;
-
+        
         private RectTransform _cardRectTransform;
+        private List<HandCard> _cards = new();
 
         private Vector2Int _spacing = new(100, 0);
 
@@ -37,11 +38,11 @@ namespace Component.Player
         {
             for (int i = 0; i < Constants.cardMaxCountOnPlayerHand; i++)
             {
-                DrawNewCard(i);
+                DrawNewCard();
             }
         }
 
-        void DrawNewCard(int index)
+        public void DrawNewCard()
         {
             // object & component
             GameObject go = ObjectPoolManager.Instance.GetHandCard();
@@ -54,10 +55,6 @@ namespace Component.Player
 
             // transform 
             go.transform.SetParent(cardParent);
-            _cardRectTransform = go.GetComponent<RectTransform>();
-
-            float spacingX = index * _cardRectTransform.sizeDelta.x + _spacing.x;
-            _cardRectTransform.anchoredPosition = new Vector2(spacingX, 0);
 
             var cardData = GameManager.Instance.cardDeck.Draw();
 
@@ -68,6 +65,27 @@ namespace Component.Player
             HandCard card = go.GetOrAddComponent<HandCard>();
             card.content = cardData.content;
             card.owner = owner;
+            _cards.Add(card);
+            
+            Rearrange();
+        }
+        
+        public void Discard(HandCard card)
+        {
+            ObjectPoolManager.Instance.ReturnHandCard(card.gameObject);
+            _cards.Remove(card);
+        }
+    
+        public void Rearrange()
+        {
+            int i = 0;
+            foreach (var card in _cards)
+            {
+                _cardRectTransform = card.GetComponent<RectTransform>();
+                float spacingX = i * _cardRectTransform.sizeDelta.x + _spacing.x;
+                _cardRectTransform.anchoredPosition = new Vector2(spacingX, 0);
+                i++;
+            }
         }
     }
 }

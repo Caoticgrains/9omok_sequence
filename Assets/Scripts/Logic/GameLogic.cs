@@ -31,8 +31,8 @@ public class GameLogic
             for (int x = 0; x < tileLength; x++)
             {
                 if (unitArray[y, x].owner == Owner.None) continue;
-                if (x == 5) continue;
-                if (y == 5) continue;
+                if (x >= 5) continue;
+                if (y >= 5) continue;
                 if (
                     (unitArray[y + 1, x].owner == currentTurn) &&
                     (unitArray[y + 2, x].owner == currentTurn) &&

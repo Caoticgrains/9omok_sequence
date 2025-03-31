@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Common;
 using Component.Board;
+using Component.Player;
+using Cysharp.Threading.Tasks.Triggers;
 using Data;
 using Pattern;
 using UnityEngine;
@@ -36,6 +38,22 @@ namespace Manager
 
         public Content SelectedContent = Content.Back;
 
+        public PlayerHand p1Hand;
+        public PlayerHand p2Hand;
+
+        public PlayerHand CurrentHand
+        {
+            get
+            {
+                if (logic.currentTurn == Owner.P1)
+                    return p1Hand;
+                if (logic.currentTurn == Owner.P2)
+                    return p2Hand;
+
+                return null;
+            }
+        }
+
         public enum EPhase
         {
             None,
@@ -62,11 +80,10 @@ namespace Manager
         {
             if (currentPhase != EPhase.HandSelect) return;
             if (logic.currentTurn != selected.owner) return;
-            
+
             currentPhase = EPhase.BoardSelect;
             SelectedContent = selected.content;
-            ObjectPoolManager.Instance.ReturnHandCard(selected.gameObject);
-            
+            CurrentHand.Discard(selected);
         }
 
         public void SelectBoardUnit(BoardUnit selected)
@@ -74,11 +91,11 @@ namespace Manager
             if (currentPhase != EPhase.BoardSelect) return;
             if (SelectedContent != selected.cardData.content) return;
             if (selected.owner != Owner.None) return;
-            
+
             currentPhase = EPhase.EndTurn;
             selected.SetSelectPlayer(logic.currentTurn);
             EndTurn();
-            
+
             Debug.Log("타일 선택 완료");
         }
 
@@ -91,7 +108,9 @@ namespace Manager
                 EndGame();
                 return;
             }
+
             logic.EndTurn();
+            CurrentHand.DrawNewCard();
             currentPhase = EPhase.HandSelect;
         }
 
