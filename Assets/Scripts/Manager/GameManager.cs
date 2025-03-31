@@ -30,9 +30,10 @@ namespace Manager
 
         #endregion
 
+        public GameLogic logic = new();
+        
         protected override void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            //throw new System.NotImplementedException();
         }
 
         public enum GameType
@@ -48,7 +49,7 @@ namespace Manager
         
         void Start()
         {
-            //Board.CreateBoard();
+            logic.SetRandomTurn();
         }
 
         // SceneManager.LoadScene("Main");

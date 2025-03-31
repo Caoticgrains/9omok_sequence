@@ -15,7 +15,7 @@ namespace Component.Board
         private Image _boardUnitImage;
         private Transform _boardUnitParent;
         private RectTransform _boardUnitRectTransform;
-        
+
         // selector
         private GameObject _selectObject;
         private Image _selectorImage;
