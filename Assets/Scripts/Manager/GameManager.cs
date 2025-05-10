@@ -72,7 +72,9 @@ namespace Manager
 
         void Start()
         {
+            
             logic.SetRandomTurn();
+            CurrentHand.DrawNewCard();
             currentPhase = EPhase.HandSelect;
         }
 
